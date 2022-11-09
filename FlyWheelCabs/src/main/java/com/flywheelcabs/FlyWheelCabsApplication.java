@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FlyWheelCabsApplication {
 
 	public static void main(String[] args) {
+		
 		SpringApplication.run(FlyWheelCabsApplication.class, args);
+		
 	}
 
 }

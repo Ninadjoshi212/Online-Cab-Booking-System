@@ -1,18 +1,26 @@
 package com.flywheelcabs.modules;
 
-<<<<<<< HEAD
-=======
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
->>>>>>> 3610255a63dc3b35081bebbfb94c24cbcef48d57
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class Admin {
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Cab {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-   private Integer AdminId;
+	private Integer cabId;
 	
-   
+	private String carType;
+	private float perKmRate;
+	
+
 }

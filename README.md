@@ -13,7 +13,7 @@
 
 <br>
 
-# Tech Members
+# Team Members
 
 -   Udit Varshney
 -   Prathmesh Shelar

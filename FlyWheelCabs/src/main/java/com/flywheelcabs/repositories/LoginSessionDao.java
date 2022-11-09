@@ -1,5 +1,5 @@
 package com.flywheelcabs.repositories;
 
-public interface LoginDao {
+public interface LoginSessionDao {
 
 }

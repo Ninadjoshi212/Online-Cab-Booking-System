@@ -4,9 +4,11 @@ import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 /*
  GlobalException handler is the main exception handler class gives flexible to throw exceptions and 
@@ -19,14 +21,18 @@ import org.springframework.web.context.request.WebRequest;
 public class GlobalExceptionHandler {
 
 //	AdminException method for throwing admin exception
+	
 	@ExceptionHandler(AdminException.class)
 	public ResponseEntity<ResponseErrorDetails> adminExceptionHandler(AdminException exception, WebRequest request){
 		
 		ResponseErrorDetails error = new ResponseErrorDetails(); // for sending user understandable format of exceptions and errors
 		
 		error.setTimestamp(LocalDateTime.now());// current time when exception happen
+		
 		error.setErrorMessage(exception.getMessage()); // Exception error
+		
 		error.setDetails(request.getDescription(false));// returns URI of URL for which error comes.
+		
 		
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
@@ -38,8 +44,11 @@ public class GlobalExceptionHandler {
 		ResponseErrorDetails error = new ResponseErrorDetails();// for sending user understandable format of exceptions and errors
 		
 		error.setTimestamp(LocalDateTime.now()); // current time when exception happen
+		
 		error.setErrorMessage(exception.getMessage()); // Exception error 
+		
 		error.setDetails(request.getDescription(false)); // returns URI of URL for which error comes.
+		
 		
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
@@ -51,7 +60,9 @@ public class GlobalExceptionHandler {
 		ResponseErrorDetails error = new ResponseErrorDetails();// for sending user understandable format of exceptions and errors
 		
 		error.setTimestamp(LocalDateTime.now()); // current time when exception happen
+		
 		error.setErrorMessage(exception.getMessage()); // Exception error 
+		
 		error.setDetails(request.getDescription(false)); // returns URI of URL for which error comes.
 		
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
@@ -64,8 +75,11 @@ public class GlobalExceptionHandler {
 		ResponseErrorDetails error = new ResponseErrorDetails();// for sending user understandable format of exceptions and errors
 		
 		error.setTimestamp(LocalDateTime.now()); // current time when exception happen
+		
 		error.setErrorMessage(exception.getMessage()); // Exception error 
+		
 		error.setDetails(request.getDescription(false)); // returns URI of URL for which error comes.
+		
 		
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
@@ -78,8 +92,11 @@ public class GlobalExceptionHandler {
 		ResponseErrorDetails error = new ResponseErrorDetails();// for sending user understandable format of exceptions and errors
 		
 		error.setTimestamp(LocalDateTime.now()); // current time when exception happen
+		
 		error.setErrorMessage(exception.getMessage()); // Exception error 
+		
 		error.setDetails(request.getDescription(false)); // returns URI of URL for which error comes.
+		
 		
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
@@ -91,10 +108,67 @@ public class GlobalExceptionHandler {
 		ResponseErrorDetails error = new ResponseErrorDetails();// for sending user understandable format of exceptions and errors
 		
 		error.setTimestamp(LocalDateTime.now()); // current time when exception happen
+		
 		error.setErrorMessage(exception.getMessage()); // Exception error 
+		
 		error.setDetails(request.getDescription(false)); // returns URI of URL for which error comes.
+		
 		
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
+	
+//	validation error exceptions
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<ResponseErrorDetails> methodValidationExceptionHandler(MethodArgumentNotValidException exception){
+		
+
+		ResponseErrorDetails error = new ResponseErrorDetails();// for sending user understandable format of exceptions and errors
+		
+		error.setTimestamp(LocalDateTime.now()); // current time when exception happen
+		
+		error.setErrorMessage(exception.getBindingResult().getFieldError().getDefaultMessage()); // Exception error 
+		
+		error.setDetails("validation fails"); // returns URI of URL for which error comes.
+		
+		
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+		
+	}
+	
+//	Handler or Invalid URI exceptions
+	@ExceptionHandler(NoHandlerFoundException.class)
+	public ResponseEntity<ResponseErrorDetails> nohandlerFoundhandler(NoHandlerFoundException exception, WebRequest request){
+		
+
+		ResponseErrorDetails error = new ResponseErrorDetails();// for sending user understandable format of exceptions and errors
+		
+		error.setTimestamp(LocalDateTime.now()); // current time when exception happen
+		
+		error.setErrorMessage(exception.getMessage()); // Exception error 
+		
+		error.setDetails(request.getDescription(false)); // returns URI of URL for which error comes.
+		
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+		
+	}
+	
+//	Default Exceptions
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ResponseErrorDetails> exceptionHandler(Exception exception, WebRequest request){
+		
+		ResponseErrorDetails error = new ResponseErrorDetails();// for sending user understandable format of exceptions and errors
+		
+		error.setTimestamp(LocalDateTime.now()); // current time when exception happen
+		
+		error.setErrorMessage(exception.getMessage()); // Exception error 
+		
+		error.setDetails(request.getDescription(false)); // returns URI of URL for which error comes.
+		
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+		
+	}
+	
+	
+	
 	
 }

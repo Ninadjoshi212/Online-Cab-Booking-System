@@ -1,5 +1,9 @@
 package com.flywheelcabs.modules;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,10 +40,16 @@ public class TripDetails {
 	private String destination;
 	
 	@NotNull(message = "distance value cannot be null")
-	private Integer distanceInKM;
+	private Double distanceInKM;
+	
 	private Double bill;
 	
-//	@ManyToOne
+	private LocalDate date;
+	
+	private LocalTime time;
+	
+//	@JsonIgnore
+//	@ManyToOne(cascade = CascadeType.ALL)
 //	private Customer customer;
 	
 //	@ManyToOne

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flywheelcabs.exceptions.BookingException;
+import com.flywheelcabs.modules.TripDetailDTO;
 import com.flywheelcabs.modules.TripDetails;
 import com.flywheelcabs.services.TicketBookingService;
 
@@ -33,7 +34,7 @@ public class TicketBookingControll {
 	
 //	this method uses post annotation for booking a cab and takes JSON data as Body
 	@PostMapping("/bookticket")
-	public ResponseEntity<TripDetails> bookAtripHandler(@Valid @RequestBody TripDetails ticketDetails) throws BookingException {
+	public ResponseEntity<TripDetails> bookAtripHandler(@Valid @RequestBody TripDetailDTO ticketDetails) throws BookingException {
 		
 	TripDetails details =  ticketService.insertTicketDetails(ticketDetails);
 		
@@ -44,9 +45,9 @@ public class TicketBookingControll {
 	
 //	this method uses PutMapping annotation for updating any booked trip details
 	@PutMapping("/bookticket")
-	public ResponseEntity<TripDetails> updateBookedTripHandler(@Valid @RequestBody TripDetails ticketDetails) throws BookingException {
+	public ResponseEntity<TripDetails> updateBookedTripHandler(@RequestBody TripDetailDTO ticketDetails, @RequestParam("id") Integer bookedId) throws BookingException {
 		
-		TripDetails details =  ticketService.updateTicketDetails(ticketDetails);
+		TripDetails details =  ticketService.updateTicketDetails(ticketDetails, bookedId);
 		
 		return new ResponseEntity<TripDetails>(details, HttpStatus.CREATED);
 		

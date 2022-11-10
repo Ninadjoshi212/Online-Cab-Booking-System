@@ -9,15 +9,15 @@ import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-//
-//@Entity
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginSession {
 
-//	@Id
-//	@Column(unique = true)
+	@Id
+	@Column(unique = true)
 	private Integer userId;
 	private String userUniqueId;
 	private LocalDateTime loginTime;

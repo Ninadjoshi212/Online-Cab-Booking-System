@@ -1,5 +1,7 @@
 package com.flywheelcabs.services;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.flywheelcabs.exceptions.BookingException;
+import com.flywheelcabs.modules.TripDetailDTO;
 import com.flywheelcabs.modules.TripDetails;
 import com.flywheelcabs.repositories.TicketBookingDao;
 
@@ -24,25 +27,49 @@ public class TicketBookingServiceImpl  implements TicketBookingService{
 	
 	
 	@Override
-	public TripDetails insertTicketDetails(TripDetails ticketDetail) throws BookingException { //This method handle the Insertion of a booked ticket details
+	public TripDetails insertTicketDetails(TripDetailDTO ticketDetail) throws BookingException { //This method handle the Insertion of a booked ticket details
 		
 		if(ticketDetail == null) throw new BookingException("Please select aTicket");
 		
-		return ticketDao.save(ticketDetail);
+		TripDetails data = new TripDetails();
+		
+		Double distance =  Math.floor(Math.random()*(100 - 3 + 1)+ 3); //Random Distance finder
+		
+		data.setStartingLocation(ticketDetail.getStartingLocation());
+		
+		data.setDestination(ticketDetail.getDestination());
+		
+		data.setDate(LocalDate.now());
+		
+		data.setTime(LocalTime.now());
+		
+		data.setDistanceInKM(distance);
+		
+		return ticketDao.save(data);
 	}
 
 	@Override
-	public TripDetails updateTicketDetails(TripDetails ticketDetails) throws BookingException { // This method used to update any booked ticket
+	public TripDetails updateTicketDetails(TripDetailDTO ticketDetails, Integer tripBookedId) throws BookingException { // This method used to update any booked ticket
 		
-		Optional<TripDetails> optional = ticketDao.findById(ticketDetails.getTripBookingId());
+		Optional<TripDetails> optional = ticketDao.findById(tripBookedId);
+		
+		TripDetails tripdata = optional.get();
 		
 		if(optional.isPresent()) {
+			Double distance =  Math.floor(Math.random()*(100 - 3 + 1)+ 3); //Random Distance finder
 			
+			tripdata.setStartingLocation(ticketDetails.getStartingLocation());
 			
-			return ticketDao.save(ticketDetails);
+			tripdata.setDestination(ticketDetails.getDestination());
+			
+			tripdata.setDistanceInKM(distance);
+			
+			tripdata.setTime(LocalTime.now());
+			
+			return ticketDao.save(tripdata);
 			
 		}
-		throw new BookingException("No cab booked with bookingId "+ticketDetails.getTripBookingId()); 
+		throw new BookingException("No cab booked with bookingId "+tripBookedId); 
 		
 	}
 
@@ -75,7 +102,7 @@ public class TicketBookingServiceImpl  implements TicketBookingService{
 	}
 
 	@Override
-	public String getBillofAtrip(Integer customerId) throws BookingException {  // for fetching total bill spend by a customer
+	public String getBilloftrip(Integer customerId) throws BookingException {  // for fetching total bill spend by a customer
 		// TODO Auto-generated method stub
 		return null;
 	}

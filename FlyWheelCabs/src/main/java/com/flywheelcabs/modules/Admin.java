@@ -11,5 +11,5 @@ import javax.persistence.Id;
 public class Admin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-   private Integer AdminId;
+    private Integer AdminId;
 }

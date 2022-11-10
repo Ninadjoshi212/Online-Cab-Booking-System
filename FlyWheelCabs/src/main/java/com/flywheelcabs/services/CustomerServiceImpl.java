@@ -5,6 +5,13 @@ import org.springframework.stereotype.Service;
 
 import com.flywheelcabs.exceptions.CustomerException;
 import com.flywheelcabs.modules.AbstractUser;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.flywheelcabs.exceptions.CustomerException;
+import com.flywheelcabs.exceptions.LoginException;
 import com.flywheelcabs.modules.Customer;
 import com.flywheelcabs.repositories.CustomerRepo;
 
@@ -54,7 +61,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer getCustomerById(Customer customer) throws CustomerException {
-		// TODO Auto-generated method stub
+  // TODO Auto-generated method stub
 		return null;
 	}
 
@@ -65,7 +72,6 @@ public class CustomerServiceImpl implements CustomerService {
 		Customer customer=cRepo.getCustomerByEmailAndMobile(email, mobile);
 		
 		return customer;			
-		
 	}
 
 }

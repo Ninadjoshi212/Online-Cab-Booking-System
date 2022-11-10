@@ -1,18 +1,29 @@
 package com.flywheelcabs.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.flywheelcabs.exceptions.CabException;
 import com.flywheelcabs.modules.Cab;
 import com.flywheelcabs.services.CabServices;
 
 
 @RestController
+@RequestMapping("/cab")
 public class CabController {
-
+	
+	@Autowired
 	private CabServices cabService; //cabService taken from service layer
 	
 	
@@ -20,8 +31,52 @@ public class CabController {
 	
 	@PostMapping("/insertcab")
 	  public ResponseEntity<Cab> insertCabHandler(@RequestBody Cab cab){
-		  Cab c=cabService.insertCab(cab);
-		  return new ResponseEntity<Cab>(c,HttpStatus.ACCEPTED);
+		  
+		Cab savedCab =cabService.insertCab(cab);
+		
+		return new ResponseEntity<Cab>(savedCab,HttpStatus.OK);
 		  
 	  }
+	
+	
+	@PostMapping("/updatecab")
+	public ResponseEntity<Cab> updateCabHandler(@RequestBody Cab cab) throws CabException{
+		
+		Cab updatedCab = cabService.updateCab(cab);
+		
+		return new ResponseEntity<Cab>(updatedCab,HttpStatus.OK);
+		
+	}
+
+	@DeleteMapping("/deletecab/{cabId}")
+	public  ResponseEntity<Cab> deleteCabHandler(@PathVariable("cabId") Integer cabId) throws CabException{
+		
+		Cab deletedCab = cabService.deleteCab(cabId);
+		
+		return new ResponseEntity<Cab>(deletedCab,HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/getcabsbytype/{carType}")
+	public ResponseEntity<List<Cab>> viewCabsOfTypeHandler(@PathVariable("carType") String carType) throws CabException{
+		
+		List<Cab> cabList = cabService.viewCabsOfType(carType);
+		
+		return new ResponseEntity<List<Cab>>(cabList,HttpStatus.OK);
+		
+	}
+	
+	
+	@GetMapping("/countcabsbytype/{carType}")
+	public ResponseEntity<Integer> countCabsOfTypeHandler(@PathVariable("carType") String carType) throws CabException{
+		
+		Integer cabCount = cabService.countCabsOfType(carType);
+		
+		return new ResponseEntity<Integer>(cabCount,HttpStatus.OK);
+		
+	}
+	
+		
+	
+	
 }

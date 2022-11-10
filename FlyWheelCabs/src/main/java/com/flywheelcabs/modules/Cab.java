@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +20,10 @@ public class Cab {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer cabId;
 	
+	@NotNull(message = "Car type should not be null")
 	private String carType;
+	
+	
 	private float perKmRate;
 	
 

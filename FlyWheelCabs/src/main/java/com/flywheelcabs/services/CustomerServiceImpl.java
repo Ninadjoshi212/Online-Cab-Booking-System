@@ -1,5 +1,11 @@
 package com.flywheelcabs.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.flywheelcabs.exceptions.CustomerException;
+import com.flywheelcabs.modules.AbstractUser;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -12,15 +18,27 @@ import com.flywheelcabs.repositories.CustomerRepo;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-	// Service Layer
-
-	// Customer Repository dependency
-	private CustomerRepo custRepo;
+	@Autowired
+	private CustomerRepo cRepo;
 
 	@Override
-	public Customer insertCustomer(Customer customer) throws CustomerException {
+	public Customer insertCustomer(AbstractUser abstractUser) throws CustomerException {
 		// TODO Auto-generated method stub
-		return null;
+		
+		Customer existingCustomer = existingCustomer(abstractUser.getEmail(), abstractUser.getMobile());
+		
+		if (existingCustomer!=null) {
+			throw new CustomerException("Customer already exist...");
+		}
+		
+		Customer customer = new Customer();
+		customer.setUserName(abstractUser.getUserName());
+		customer.setPassword(abstractUser.getPassword());
+		customer.setMobile(abstractUser.getMobile());
+		customer.setEmail(abstractUser.getEmail());
+		customer.setAddress(abstractUser.getAddress());
+		
+		return cRepo.save(customer);
 	}
 
 	@Override
@@ -36,21 +54,24 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<Customer> getAllCustomers() throws CustomerException {
+	public Customer getAllCustomers(Customer customer) throws CustomerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Customer getCustomerById() throws CustomerException {
-		// TODO Auto-generated method stub
+	public Customer getCustomerById(Customer customer) throws CustomerException {
+  // TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Customer validateCustomer(String username, String password) throws LoginException {
+	public Customer existingCustomer(String email, String mobile) throws CustomerException {
 		// TODO Auto-generated method stub
-		return null;
+		
+		Customer customer=cRepo.getCustomerByEmailAndMobile(email, mobile);
+		
+		return customer;			
 	}
 
 }

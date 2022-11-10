@@ -1,5 +1,7 @@
 package com.flywheelcabs.modules;
 
+import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,16 +13,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Data
-@Setter
-@Getter
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Customer {
+@Getter
+@Setter
+public class Customer extends AbstractUser {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO) // Auto Generation/Increment of Cutomer-Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer customerId;
+
 
 }

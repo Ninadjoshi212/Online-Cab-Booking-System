@@ -8,4 +8,5 @@ import com.flywheelcabs.modules.TripDetails;
 @Repository
 public interface TripdataRepository extends JpaRepository<TripDetails, Integer>{
 
+	
 }

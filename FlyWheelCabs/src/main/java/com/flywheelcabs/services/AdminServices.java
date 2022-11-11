@@ -1,13 +1,9 @@
 package com.flywheelcabs.services;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.swing.plaf.basic.BasicToolTipUI;
-
 import com.flywheelcabs.exceptions.AdminException;
-import com.flywheelcabs.exceptions.CustomerException;
 import com.flywheelcabs.modules.Admin;
 import com.flywheelcabs.modules.TripDetails;
 

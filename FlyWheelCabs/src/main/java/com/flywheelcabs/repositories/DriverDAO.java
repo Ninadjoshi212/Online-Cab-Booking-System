@@ -2,12 +2,15 @@ package com.flywheelcabs.repositories;
 
 
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.flywheelcabs.modules.*;
 @Repository
 public interface DriverDAO extends JpaRepository<Driver, Integer>{
+
+	public Driver findByMobileAndPassword(String mobileNumber,String password);
 
 //		public Optional<Driver> findByUserUsername(String name);
 //		

@@ -11,7 +11,7 @@ import com.flywheelcabs.modules.Customer;
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, Integer> {
 
-	@Query("select c from Customer c where c.email=?1 AND c.mobile=?2")
-	public Customer getCustomerByEmailAndMobile(String email, String mobile);
+	@Query("select c from Customer c where c.userName=?1 AND c.password=?2")
+	public Customer getCustomerByUsernameAndpassword(String userName, String password);
 
 }

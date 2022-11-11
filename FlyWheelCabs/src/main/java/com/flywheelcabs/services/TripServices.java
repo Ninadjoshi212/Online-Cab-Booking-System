@@ -3,12 +3,14 @@ package com.flywheelcabs.services;
 import java.util.List;
 
 import com.flywheelcabs.exceptions.BookingException;
+import com.flywheelcabs.exceptions.CustomerException;
+import com.flywheelcabs.exceptions.LoginException;
 import com.flywheelcabs.modules.TripDetailDTO;
 import com.flywheelcabs.modules.TripDetails;
 
-public interface TicketBookingService {
+public interface TripServices {
 
-	public TripDetails insertTicketDetails(TripDetailDTO ticketDetail) throws BookingException;
+	public TripDetails insertTicketDetails(TripDetailDTO ticketDetail) throws BookingException, LoginException, CustomerException;
 	
 	public TripDetails updateTicketDetails(TripDetailDTO ticketDetails,  Integer tripBookedId) throws BookingException;
 	

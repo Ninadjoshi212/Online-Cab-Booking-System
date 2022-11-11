@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.flywheelcabs.exceptions.CabException;
 import com.flywheelcabs.modules.Cab;
-//import com.flywheelcabs.repositories.CabRepo;
 import com.flywheelcabs.repositories.CabRepo;
 
 
@@ -80,12 +79,12 @@ public class CabServiceImpl implements CabServices{
 	@Override
 	public int countCabsOfType(String carType) throws CabException {
 		
-		List<Cab> cabs= cabRepo.findByCarType(carType);
+		int count = cabRepo.getcount(carType);
 		
-		if(cabs.size() == 0)
+		if(count== 0)
 			throw new CabException("There are no cabs with car type :"+carType);
-		else
-			return cabs.size();
+	
+			return count;
 	}
 
 }

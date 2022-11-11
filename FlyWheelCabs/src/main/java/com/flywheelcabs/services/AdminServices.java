@@ -7,9 +7,9 @@ import java.util.List;
 import javax.swing.plaf.basic.BasicToolTipUI;
 
 import com.flywheelcabs.exceptions.AdminException;
+import com.flywheelcabs.exceptions.CustomerException;
 import com.flywheelcabs.modules.Admin;
 import com.flywheelcabs.modules.TripDetails;
-
 
 public interface AdminServices {
    
@@ -22,4 +22,5 @@ public interface AdminServices {
 	public List<TripDetails> getTripCustomerwise() throws AdminException;
 	public List<TripDetails> getTripDatewise() throws AdminException;
 	public List<TripDetails> getAllTripsForDays(Integer customerId,LocalDateTime fromDate ,LocalDateTime toDate) throws AdminException;
+
 }

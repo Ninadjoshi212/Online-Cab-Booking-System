@@ -26,7 +26,7 @@ public class LoginControll {
 	
 	
 	@PostMapping("/login")
-	public ResponseEntity<LoginSession> userLoginHandler(@Valid @RequestBody LoginDTO logindata) throws LoginException{
+	public ResponseEntity<LoginSession> userLoginHandler(@Valid @RequestBody LoginDTO logindata) throws Exception{
 		
 		LoginSession loginSession = loginService.userLoginService(logindata);
 		

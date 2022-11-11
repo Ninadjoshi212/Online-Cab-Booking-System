@@ -1,21 +1,22 @@
 package com.flywheelcabs.services;
 
+import java.util.List;
+
 import com.flywheelcabs.exceptions.CustomerException;
-import com.flywheelcabs.modules.AbstractUser;
 import com.flywheelcabs.modules.Customer;
 
 public interface CustomerService {
 
-	public Customer insertCustomer(AbstractUser abstractUser) throws CustomerException;
+	public Customer insertCustomer(Customer customer) throws CustomerException;
 
 	public Customer updateCustomer(Customer customer) throws CustomerException;
 
-	public Customer deleteCustomer(Customer customer) throws CustomerException;
+	public Customer deleteCustomer(Integer customerId) throws CustomerException;
 
-	public Customer getAllCustomers(Customer customer) throws CustomerException;
+	public List<Customer> getAllCustomers() throws CustomerException;
 
-	public Customer getCustomerById(Customer customer) throws CustomerException;
+	public Customer getCustomerById(Integer customerId) throws CustomerException;
 
-	public Customer existingCustomer(String email, String mobile) throws CustomerException;
+	public Customer validateCustomer(String userName, String password) throws CustomerException;
 
 }

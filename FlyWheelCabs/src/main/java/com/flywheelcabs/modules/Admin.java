@@ -8,17 +8,17 @@ import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import lombok.NoArgsConstructor;
 
-
-
-
 @Entity
-@Data 
 @NoArgsConstructor 
 @AllArgsConstructor
-public class Admin {
+@Data
+@EqualsAndHashCode(callSuper=false)
+public class Admin extends AbstractUser{
 	
    
 	@Id

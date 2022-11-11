@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.flywheelcabs.exceptions.AdminException;
+import com.flywheelcabs.exceptions.CustomerException;
 import com.flywheelcabs.modules.Admin;
 import com.flywheelcabs.modules.TripDetails;
 import com.flywheelcabs.repositories.AdminRepo;
@@ -16,12 +17,14 @@ import com.flywheelcabs.repositories.TicketBookingDao;
 
 @Service
 public class AdminServiceImpl implements AdminServices {
-    @Autowired
+	
+  @Autowired
 	private AdminRepo aRepo;
   
     @Autowired
     private CustomerRepo cRepo;
     
+    @Autowired
     private TicketBookingDao TktRepo;
 	
 	
@@ -58,6 +61,7 @@ public class AdminServiceImpl implements AdminServices {
 	}
 
 	@Override
+
 	public List<TripDetails> getAllTrips(Integer customerId) throws AdminException {
 		// TODO Auto-generated method stub
 		 
@@ -66,6 +70,7 @@ public class AdminServiceImpl implements AdminServices {
 
 	@Override
 	public List<TripDetails> getTripCabwise() throws AdminException {
+
 		// TODO Auto-generated method stub
 		return null;
 	}

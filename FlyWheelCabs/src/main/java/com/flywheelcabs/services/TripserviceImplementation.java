@@ -10,15 +10,19 @@ import org.springframework.stereotype.Service;
 
 import com.flywheelcabs.exceptions.BookingException;
 import com.flywheelcabs.exceptions.CustomerException;
+import com.flywheelcabs.exceptions.DriverException;
 import com.flywheelcabs.exceptions.LoginException;
 import com.flywheelcabs.modules.Customer;
+import com.flywheelcabs.modules.Driver;
 import com.flywheelcabs.modules.Invoice;
 import com.flywheelcabs.modules.LoginSession;
 import com.flywheelcabs.modules.TripDetailDTO;
 import com.flywheelcabs.modules.TripDetails;
 import com.flywheelcabs.repositories.CustomerRepo;
+import com.flywheelcabs.repositories.DriverDAO;
 import com.flywheelcabs.repositories.LoginSessionDao;
 import com.flywheelcabs.repositories.TripdataRepository;
+
 
 /*
  This is the Service layer. All API call for ticket booking or a tripBooking are handle and
@@ -38,72 +42,126 @@ public class TripserviceImplementation  implements TripServices{
 	@Autowired
 	private CustomerRepo customerRepo;
 	
+	@Autowired
+	private DriverDAO driverRepo;
+	
 	@Override
-	public TripDetails insertTicketDetails(TripDetailDTO ticketDetail) throws BookingException, LoginException, CustomerException { //This method handle the Insertion of a booked ticket details
+	public TripDetails insertTicketDetails(TripDetailDTO ticketDetail) throws BookingException, LoginException, CustomerException, DriverException { //This method handle the Insertion of a booked ticket details
 		
 		if(ticketDetail == null) throw new BookingException("Please give valid  data to book a cab");
 		
 		LoginSession existingSession = loginDao.findByMobile(ticketDetail.getMobileNumber()); // checking is user  logged in or not 
 		if(existingSession == null) throw new LoginException("Please Login first to book a cab");
 		
-		Optional<Customer> optional = customerRepo.findById(ticketDetail.getCustomerId()); // finding customer with given id
 		
-		if(optional == null) throw new CustomerException("customer does not have any account");
+//		if ticket booked from date to todate have some difference issue user can not be book ticket
+		if( ticketDetail.getFromDate().isAfter(LocalDate.now().minusDays(1)) && ticketDetail.getFromDate().isBefore(ticketDetail.getToDate().plusDays(1))) {
 		
-		Customer existCustomer = optional.get();
-		
-		TripDetails data = new TripDetails();
-		
-		data.setCustomer(existCustomer); // adding customer  to trip detail
-		
-		List<TripDetails> tripList = existCustomer.getTriplist();
-		
-		Double distance =  Math.floor(Math.random()*(100 - 3 + 1)+ 3); //Random Distance finder
-		
-		data.setStartingLocation(ticketDetail.getStartingLocation());
-		
-		data.setDestination(ticketDetail.getDestination());
-		
-		data.setDate(LocalDate.now());
-		
-		data.setTime(LocalTime.now());
-		
-		data.setBill(null);
+			Optional<Customer> optional = customerRepo.findById(ticketDetail.getCustomerId()); // finding customer with given id
+			
+			if(optional == null) throw new CustomerException("customer does not have any account");
+			
+			List<Driver> driverList= driverRepo.findAll();
+			Driver availableDriver = null;
+			
+			for(Driver driver : driverList) {
+				
+				if(driver.isAvailable()) {
+					availableDriver = driver;
+					break;
+				}
+				
+			}
+			
+			if(availableDriver == null) throw new DriverException("No driver available now please wait....");
+			
+			Double rateperKM = (double) availableDriver.getCab().getPerKmRate();
+			
+			availableDriver.setAvailable(false); // marking driver as booked
+			
+			Customer existCustomer = optional.get();
+			
+			TripDetails data = new TripDetails();
+			
+			data.setCustomer(existCustomer); // adding customer  to trip detail
+			
+			List<TripDetails> tripList = existCustomer.getTriplist(); // getting trip list from customer 
+			
+			Double distance =  Math.floor(Math.random()*(100 - 3 + 1)+ 3); //Random Distance finder
+			
+			data.setStartingLocation(ticketDetail.getStartingLocation());
+			
+			data.setDestination(ticketDetail.getDestination());
+			
+			data.setDate(LocalDate.now());
+			
+			data.setTime(LocalTime.now());
+			
+			data.setBill(rateperKM * distance);
 
-		data.setCabId(null);
-		
-		data.setDistanceInKM(distance);
-		
-		tripList.add(data); // adding trip data to customers trip list.
-		
-		return ticketDao.save(data);
+			data.setCabId(availableDriver.getCab().getCabId());
+			
+			data.setCarType(availableDriver.getCab().getCarType());
+			
+			data.setDistanceInKM(distance);
+			
+			data.setCabdriver(availableDriver);
+			
+			tripList.add(data); // adding trip data to customers trip list.
+			
+			availableDriver.getTripList().add(data); // adding trip data to driver's list;
+			
+			return ticketDao.save(data);
+			
+		}
+		throw new BookingException("please provide a valid date");
+
 	}
 
 	@Override
-	public TripDetails updateTicketDetails(TripDetailDTO ticketDetails, Integer tripBookedId) throws BookingException { // This method used to update any booked ticket
+	public TripDetails updateTicketDetails(TripDetailDTO ticketDetails, Integer tripBookedId) throws BookingException, LoginException { // This method used to update any booked ticket
+		
+		Optional<LoginSession> existingSession = loginDao.findById(ticketDetails.getCustomerId()); // checking is user  logged in or not 
+		if(existingSession == null) throw new LoginException("Please Login first to book a cab");
+		
+
+//		If fromDate is today or from-date is after to-date you can not update your ticket
+		if(ticketDetails.getFromDate().isAfter(LocalDate.now()) && ticketDetails.getFromDate().isBefore(ticketDetails.getToDate().plusDays(1))) {
 		
 		Optional<TripDetails> optional = ticketDao.findById(tripBookedId);
 		
-		TripDetails tripdata = optional.get();
-		
 		if(optional.isPresent()) {
-			Double distance =  Math.floor(Math.random()*(100 - 3 + 1)+ 3); //Random Distance finder
+
+			TripDetails tripdata = optional.get();
 			
-			tripdata.setStartingLocation(ticketDetails.getStartingLocation());
-			
-			tripdata.setDestination(ticketDetails.getDestination());
-			
-			tripdata.setDistanceInKM(distance);
-			
-			tripdata.setTime(LocalTime.now());
-			
-			return ticketDao.save(tripdata);
+		
+				Double distance =  Math.floor(Math.random()*(100 - 3 + 1)+ 3); //Random Distance finder
+				
+				tripdata.setStartingLocation(ticketDetails.getStartingLocation());
+				
+				tripdata.setDestination(ticketDetails.getDestination());
+				
+				tripdata.setDistanceInKM(distance);
+				
+				tripdata.setFromDate(ticketDetails.getFromDate());
+				
+				tripdata.setToDate(ticketDetails.getFromDate());
+				
+				tripdata.setTime(LocalTime.now());
+				
+				
+				return ticketDao.save(tripdata);
+				
+			}
+
+		throw new BookingException("No cab booked with bookingId "+tripBookedId); 
 			
 		}
-		throw new BookingException("No cab booked with bookingId "+tripBookedId); 
-		
+		throw new BookingException("You can update tickets if traveling day and bookind date have min 1 day difference");
 	}
 
+	
+	
 	@Override
 	public TripDetails deleteTicketDetails(Integer tripBookingId) throws BookingException, LoginException { // for canceling or deleting a trip or ride 
 		
@@ -124,6 +182,12 @@ public class TripserviceImplementation  implements TripServices{
 			
 			customer.setTriplist(tripList);
 			
+			Driver cabdriver = existingTicket.getCabdriver();
+			
+			cabdriver.setAvailable(true); // marking as available driver
+			
+			driverRepo.save(cabdriver);
+			
 			customerRepo.save(customer);
 			
 			ticketDao.delete(existingTicket);
@@ -136,6 +200,8 @@ public class TripserviceImplementation  implements TripServices{
 		
 	}
 
+	
+	
 	@Override
 	public List<TripDetails> getAllTripDetailsOfACustomer(Integer customerId) throws BookingException, CustomerException, LoginException { // for getting all trip completed by a customer
 		
@@ -155,6 +221,8 @@ public class TripserviceImplementation  implements TripServices{
 		return tripList;
 	}
 
+	
+	
 	@Override
 	public Invoice getInvoiceDetails(Integer customerId) throws BookingException, CustomerException, LoginException {  // for fetching total bill spend by a customer
 		

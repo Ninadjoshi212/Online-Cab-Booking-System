@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.flywheelcabs.exceptions.CabException;
 import com.flywheelcabs.modules.Cab;
-//import com.flywheelcabs.repositories.CabRepo;
 import com.flywheelcabs.repositories.CabRepo;
 
 
-
+@Service
 public class CabServiceImpl implements CabServices{
 	
 	@Autowired

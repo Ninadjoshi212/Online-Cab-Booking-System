@@ -19,9 +19,10 @@ public class LoginDTO {
 	@NotNull(message = "mobile number can not be null")
 	private String mobileNumber;
 	
-	@Size(min = 6, max = 12, message = "Password length should be 6 - 15 character")
+	@Size(min = 6, max = 15, message = "Password length should be 6 - 15 character")
 	@NotBlank
-	@Pattern(regexp = "[a-z]{2,7}[A-Z]{2,7}[0-9]{1,9}", message = "lowercase should be 2-7 , uppercase should be 2-7 and number should be 1-9 ")
+	@Pattern(regexp = "[a-z]{2,7}[A-Z]{2,7}[0-9]{1,9}", message = "password should look like abcABC999, Morethan 2 lowercase, upercase and number")
 	private String password;
+	
 	
 }

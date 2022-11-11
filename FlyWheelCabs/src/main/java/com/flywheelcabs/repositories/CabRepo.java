@@ -9,5 +9,4 @@ import com.flywheelcabs.modules.Cab;
 public interface CabRepo extends JpaRepository<Cab, Integer>{
 
 	public List<Cab> findByCarType(String carType);
-
 }

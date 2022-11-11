@@ -8,7 +8,6 @@ import com.flywheelcabs.exceptions.CustomerException;
 import java.util.List;
 import java.util.Optional;
 
-import com.flywheelcabs.exceptions.LoginException;
 import com.flywheelcabs.modules.Customer;
 import com.flywheelcabs.repositories.CustomerRepo;
 

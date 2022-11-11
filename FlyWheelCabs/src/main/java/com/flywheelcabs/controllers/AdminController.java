@@ -1,7 +1,7 @@
 package com.flywheelcabs.controllers;
 
-import javax.websocket.server.PathParam;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,18 +18,19 @@ import com.flywheelcabs.services.AdminServices;
 @RestController
 public class AdminController {
 	
-  private AdminServices Aservice;
+@Autowired
+  private AdminServices aService;
   
   @PostMapping("/admin")
   public ResponseEntity<Admin> saveAdminHandler(@RequestBody Admin admin) throws AdminException{
-	  Admin ad=Aservice.insertAdmin(admin);
+	  Admin ad=aService.insertAdmin(admin);
 	  return new ResponseEntity<Admin>(ad,HttpStatus.ACCEPTED);
 	  
   }
   @PutMapping("/update")
 	public ResponseEntity<Admin> updateEmployee(@RequestBody Admin admin) throws AdminException{
 
-	Admin ad1 = Aservice.updateAdmin( admin);
+	Admin ad1 = aService.updateAdmin( admin);
 	return new ResponseEntity<Admin>(ad1,HttpStatus.OK);
 	
 	}
@@ -37,7 +38,7 @@ public class AdminController {
   @DeleteMapping("/admin/{adminId}")
   public ResponseEntity<Admin> deleteEmployeeById(@PathVariable("adminId") Integer adminId)throws AdminException {
 	
-	Admin adm2=Aservice.deleteAdminById(adminId);
+	Admin adm2=aService.deleteAdminById(adminId);
 	return new ResponseEntity<Admin>(adm2,HttpStatus.OK);
 }
   

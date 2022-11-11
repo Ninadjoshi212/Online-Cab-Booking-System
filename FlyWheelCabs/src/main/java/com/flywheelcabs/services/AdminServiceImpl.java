@@ -3,12 +3,20 @@ package com.flywheelcabs.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.flywheelcabs.exceptions.AdminException;
+import com.flywheelcabs.exceptions.CustomerException;
 import com.flywheelcabs.modules.Admin;
+import com.flywheelcabs.modules.TripDetails;
 import com.flywheelcabs.repositories.AdminRepo;
 
+
+@Service
 public class AdminServiceImpl implements AdminServices {
-  
+	
+  @Autowired
 	private AdminRepo aRepo;
 	
 	
@@ -45,7 +53,7 @@ public class AdminServiceImpl implements AdminServices {
 	}
 
 	@Override
-	public List<TicketBookingService> getAllTrips(Integer customerId) throws AdminException {
+	public List<TripDetails> getAllTrips(Integer customerId) throws CustomerException {
 		// TODO Auto-generated method stub
 		return null;
 	}

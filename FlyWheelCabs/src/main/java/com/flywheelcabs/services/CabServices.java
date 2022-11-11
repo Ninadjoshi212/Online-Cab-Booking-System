@@ -2,11 +2,9 @@ package com.flywheelcabs.services;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 
 import com.flywheelcabs.exceptions.CabException;
 import com.flywheelcabs.modules.Cab;
-
 
 public interface CabServices {
 	

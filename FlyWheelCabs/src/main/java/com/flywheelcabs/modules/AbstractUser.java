@@ -3,7 +3,7 @@ package com.flywheelcabs.modules;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -16,21 +16,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AbstractUser {
 
-//	@Size(min = 3, max = 20, message = "Username should be between 3 to 20 characters")
-//	@NotBlank
+	@Size(min = 3, max = 20, message = "Username length should be in between 3 to 20 characters")
+	@NotBlank
 	private String userName;
 
-//	@Size(min = 8, max = 15, message = "Not a valid password")
+	@Size(min = 6, max = 15, message = "password length should be in between 6 - 15 character")
+	@Pattern(regexp = "[a-z]{2,7}[A-Z]{2,7}[0-9]{1,9}", message = "password should look like abcABC999, Morethan 2 lowercase, upercase and number ")
 	private String password;
 
-//	@Size(max = 10, message = "Not valid mobile number of max 10 digits")
+	@Size(max = 10, message = "Not valid mobile number size more than 10 digits")
 	private String mobile;
 
-//	@Email(message = "Not valid mail id")
+	@Email(message = "Not valid mail id")
 	private String email;
 
-//	@NotBlank
-//	@NotNull
+	
 	private String address;
 
 }

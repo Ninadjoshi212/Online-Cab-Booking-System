@@ -7,6 +7,7 @@ import com.flywheelcabs.exceptions.CustomerException;
 import com.flywheelcabs.modules.AbstractUser;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,9 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private CustomerRepo cRepo;
 
+	
 	@Override
-	public Customer insertCustomer(AbstractUser abstractUser) throws CustomerException {
+	public Customer insertCustomer(AbstractUser abstractUser) throws CustomerException{
 		// TODO Auto-generated method stub
 		
 		Customer existingCustomer = existingCustomer(abstractUser.getEmail(), abstractUser.getMobile());
@@ -42,9 +44,12 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer updateCustomer(Customer customer) throws CustomerException {
-		// TODO Auto-generated method stub
-		return null;
+	public Customer updateCustomer(Customer customer) throws CustomerException, LoginException {
+		Optional<Customer> optional = cRepo.findById(customer.getCustomerId());
+		
+		if(optional == null) throw new CustomerException("No customer found with Id "+ customer.getCustomerId());
+		
+		return cRepo.save(customer);
 	}
 
 	@Override

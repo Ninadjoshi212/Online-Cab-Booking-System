@@ -14,9 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flywheelcabs.exceptions.BookingException;
+import com.flywheelcabs.exceptions.CustomerException;
+import com.flywheelcabs.exceptions.LoginException;
+import com.flywheelcabs.modules.LoginDTO;
+import com.flywheelcabs.modules.LoginSession;
 import com.flywheelcabs.modules.TripDetailDTO;
 import com.flywheelcabs.modules.TripDetails;
-import com.flywheelcabs.services.TicketBookingService;
+import com.flywheelcabs.repositories.LoginSessionDao;
+import com.flywheelcabs.services.LoginService;
+import com.flywheelcabs.services.TripServices;
 
 
 
@@ -26,16 +32,16 @@ import com.flywheelcabs.services.TicketBookingService;
 
 @RestController
 @RequestMapping("/ticket")
-public class TicketBookingControll {
+public class TripdataControll {
 	
 	@Autowired
-	private TicketBookingService ticketService;
-	
+	private TripServices ticketService;
+
 	
 //	this method uses post annotation for booking a cab and takes JSON data as Body
 	@PostMapping("/bookticket")
-	public ResponseEntity<TripDetails> bookAtripHandler(@Valid @RequestBody TripDetailDTO ticketDetails) throws BookingException {
-		
+	public ResponseEntity<TripDetails> bookAtripHandler(@Valid @RequestBody TripDetailDTO ticketDetails) throws BookingException, LoginException, CustomerException {
+	
 	TripDetails details =  ticketService.insertTicketDetails(ticketDetails);
 		
 	return new ResponseEntity<TripDetails>(details, HttpStatus.CREATED);

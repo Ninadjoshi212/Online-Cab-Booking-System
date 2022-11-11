@@ -39,6 +39,8 @@ public class CabController {
 	  }
 	
 	
+//Update cab
+	
 	@PostMapping("/updatecab")
 	public ResponseEntity<Cab> updateCabHandler(@RequestBody Cab cab) throws CabException{
 		
@@ -48,6 +50,9 @@ public class CabController {
 		
 	}
 
+	
+//Delete cab	
+	
 	@DeleteMapping("/deletecab/{cabId}")
 	public  ResponseEntity<Cab> deleteCabHandler(@PathVariable("cabId") Integer cabId) throws CabException{
 		
@@ -56,6 +61,9 @@ public class CabController {
 		return new ResponseEntity<Cab>(deletedCab,HttpStatus.OK);
 	}
 	
+	
+	
+//Get cab by car type	
 	
 	@GetMapping("/getcabsbytype/{carType}")
 	public ResponseEntity<List<Cab>> viewCabsOfTypeHandler(@PathVariable("carType") String carType) throws CabException{
@@ -66,6 +74,8 @@ public class CabController {
 		
 	}
 	
+	
+//Get count of cabs by car type	
 	
 	@GetMapping("/countcabsbytype/{carType}")
 	public ResponseEntity<Integer> countCabsOfTypeHandler(@PathVariable("carType") String carType) throws CabException{

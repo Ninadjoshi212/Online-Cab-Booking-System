@@ -10,10 +10,12 @@ import com.flywheelcabs.controllers.CustomerController;
 import com.flywheelcabs.exceptions.LoginException;
 import com.flywheelcabs.modules.Admin;
 import com.flywheelcabs.modules.Customer;
+import com.flywheelcabs.modules.Driver;
 import com.flywheelcabs.modules.LoginDTO;
 import com.flywheelcabs.modules.LoginSession;
 import com.flywheelcabs.repositories.AdminRepo;
 import com.flywheelcabs.repositories.CustomerRepo;
+import com.flywheelcabs.repositories.DriverDAO;
 import com.flywheelcabs.repositories.LoginSessionDao;
 
 import lombok.AllArgsConstructor;
@@ -33,6 +35,9 @@ public class LoginServiceImpl implements LoginService{
 	@Autowired
 	private AdminRepo aRepo;
 	
+	@Autowired
+	private DriverDAO driverDao;
+	
 	@Override
 	public LoginSession userLoginService(LoginDTO logindata) throws LoginException ,Exception {
 		
@@ -46,6 +51,8 @@ public class LoginServiceImpl implements LoginService{
 		
 		Admin existingAdmin = aRepo.findByMobileAndPassword(logindata.getMobileNumber(), logindata.getPassword());
 		
+		Driver existingDriver = driverDao.findByMobileAndPassword(logindata.getMobileNumber(), logindata.getPassword());
+		
 		String type = "";
 		Integer userId = null;
 		
@@ -57,6 +64,12 @@ public class LoginServiceImpl implements LoginService{
 			type ="customer";
 			userId = existingCustomer.getCustomerId();
 		}
+		
+		if(existingDriver != null) {
+			type ="driver";
+			userId = existingDriver.getDriverId();
+		}
+		
         
         if(userId == null) throw new Exception("User not registered Yet Please Open a account first");
 

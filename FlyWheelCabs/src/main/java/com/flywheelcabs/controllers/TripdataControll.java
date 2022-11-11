@@ -62,7 +62,7 @@ public class TripdataControll {
 	
 //	this method uses DeleteMapping annotation for canceling any ride 
 	@DeleteMapping("/bookticket")
-	public ResponseEntity<TripDetails> cancelABookedTripHandler( @RequestParam("id") Integer tripBookedId) throws BookingException {
+	public ResponseEntity<TripDetails> cancelABookedTripHandler( @RequestParam("id") Integer tripBookedId) throws BookingException, LoginException {
 		
 		TripDetails details =  ticketService.deleteTicketDetails(tripBookedId);
 		

@@ -15,5 +15,6 @@ public interface CustomerRepo extends JpaRepository<Customer, Integer> {
 	public Customer getCustomerByUsernameAndpassword(String userName, String password);
 
 	public Customer findByMobileAndPassword(String mobile, String password);
+	
 
 }

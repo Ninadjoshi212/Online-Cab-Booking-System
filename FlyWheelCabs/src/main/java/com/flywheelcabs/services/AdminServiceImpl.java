@@ -23,9 +23,13 @@ public class AdminServiceImpl implements AdminServices {
     @Autowired
     private CustomerRepo cRepo;
     
-    @Autowired
-    private TripdataRepository TktRepo;
+//    @Autowired
+//    private TripdataRepository TktRepo;
 	
+
+//	@Autowired
+//	private LoginSessionDao loginDao;
+    
 	
 	@Override
 	public Admin insertAdmin(Admin admin) throws AdminException {
@@ -36,7 +40,17 @@ public class AdminServiceImpl implements AdminServices {
 
 	@Override
 	public Admin updateAdmin(Admin admin)throws AdminException {
-		// TODO Auto-generated method stub
+//		
+//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
+//		
+//		if(existingSession == null) throw new LoginException("Please login to update your data");
+//		
+//		Optional<Admin> optional = aRepo.findById(admin.getAdminId());
+//		
+//		if(optional.isPresent()) {
+//			return aRepo.save(admin);
+//		}
+//		throw new CustomerException("admin not found");
 		Optional<Admin> opt=aRepo.findById(admin.getAdminId());
 		if(opt.isPresent()) {
 			return aRepo.save(admin);
@@ -49,6 +63,11 @@ public class AdminServiceImpl implements AdminServices {
 	@Override
 	public Admin deleteAdminById(Integer adminId) throws AdminException {
 		// TODO Auto-generated method stub
+		
+//		Optional<LoginSession> existingSession = loginDao.findById(adminId);
+//		
+//		if(existingSession == null) throw new LoginException("Please login to update your data");
+		
 		Optional<Admin> opt=aRepo.findById(adminId);
 		if(opt.isPresent()) {
 			Admin existingAdmin=opt.get();
@@ -62,7 +81,10 @@ public class AdminServiceImpl implements AdminServices {
 	@Override
 
 	public List<TripDetails> getAllTrips(Integer customerId) throws AdminException {
-		// TODO Auto-generated method stub
+
+//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
+//		
+//		if(existingSession == null) throw new LoginException("Please login to update your data");
 		 
 			return null;
 	}
@@ -70,26 +92,40 @@ public class AdminServiceImpl implements AdminServices {
 	@Override
 	public List<TripDetails> getTripCabwise() throws AdminException {
 
+//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
+//		
+//		if(existingSession == null) throw new LoginException("Please login to update your data");
+		
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<TripDetails> getTripCustomerwise() throws AdminException {
-		// TODO Auto-generated method stub
+		
+//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
+//		
+//		if(existingSession == null) throw new LoginException("Please login to update your data");
+		
 		return null;
 	}
 
 	@Override
 	public List<TripDetails> getTripDatewise() throws AdminException {
-		// TODO Auto-generated method stub
+
+//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
+//		
+//		if(existingSession == null) throw new LoginException("Please login to update your data");
 		return null;
 	}
 
 	@Override
 	public List<TripDetails> getAllTripsForDays(Integer customerId, LocalDateTime fromDate, LocalDateTime toDate)
 			throws AdminException {
-		// TODO Auto-generated method stub
+
+//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
+//		
+//		if(existingSession == null) throw new LoginException("Please login to update your data");
 		return null;
 	}
 

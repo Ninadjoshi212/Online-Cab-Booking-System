@@ -12,4 +12,6 @@ public interface LoginSessionDao extends JpaRepository<LoginSession, Integer>{
 	
 	public LoginSession  findByMobile(String mobile);
 	
+	public LoginSession findByType(String type);
+	
 }

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.flywheelcabs.exceptions.AdminException;
 import com.flywheelcabs.exceptions.CustomerException;
+import com.flywheelcabs.exceptions.LoginException;
 import com.flywheelcabs.modules.Customer;
 import com.flywheelcabs.services.CustomerService;
 
@@ -36,7 +38,7 @@ public class CustomerController {
 
 	@PutMapping("/customer/update")
 	public ResponseEntity<Customer> updatCustomerHandler(@Valid @RequestBody Customer customer)
-			throws CustomerException {
+			throws CustomerException, LoginException {
 
 		Customer updatedCustomer = cService.updateCustomer(customer);
 
@@ -54,7 +56,7 @@ public class CustomerController {
 	}
 
 	@GetMapping("/customer/")
-	public ResponseEntity<List<Customer>> getAllCustomerHandler() throws CustomerException {
+	public ResponseEntity<List<Customer>> getAllCustomerHandler() throws CustomerException, AdminException {
 
 		List<Customer> customers = cService.getAllCustomers();
 

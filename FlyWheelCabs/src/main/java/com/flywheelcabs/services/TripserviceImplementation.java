@@ -12,6 +12,7 @@ import com.flywheelcabs.exceptions.BookingException;
 import com.flywheelcabs.exceptions.CustomerException;
 import com.flywheelcabs.exceptions.LoginException;
 import com.flywheelcabs.modules.Customer;
+import com.flywheelcabs.modules.Invoice;
 import com.flywheelcabs.modules.LoginSession;
 import com.flywheelcabs.modules.TripDetailDTO;
 import com.flywheelcabs.modules.TripDetails;
@@ -27,7 +28,6 @@ import com.flywheelcabs.repositories.TripdataRepository;
 
 @Service
 public class TripserviceImplementation  implements TripServices{
-
 	@Autowired
 	private TripdataRepository ticketDao; // Dao Interface of ticketBooking for calling respective repository methods.
 	
@@ -105,13 +105,26 @@ public class TripserviceImplementation  implements TripServices{
 	}
 
 	@Override
-	public TripDetails deleteTicketDetails(Integer tripBookingId) throws BookingException { // for canceling or deleting a trip or ride 
+	public TripDetails deleteTicketDetails(Integer tripBookingId) throws BookingException, LoginException { // for canceling or deleting a trip or ride 
 		
 		Optional<TripDetails> optional = ticketDao.findById(tripBookingId);
 		
 		if(optional.isPresent()) {
 			
 			TripDetails existingTicket = optional.get();
+			
+			Customer customer = existingTicket.getCustomer();
+			
+			Optional<LoginSession> existingSession = loginDao.findById(customer.getCustomerId()); // checking is user  logged in or not 
+			if(existingSession == null) throw new LoginException("Please Login first to book a cab");
+			
+			List<TripDetails> tripList = customer.getTriplist();
+			
+			tripList.remove(tripList.size() - 1);
+			
+			customer.setTriplist(tripList);
+			
+			customerRepo.save(customer);
 			
 			ticketDao.delete(existingTicket);
 			
@@ -124,18 +137,59 @@ public class TripserviceImplementation  implements TripServices{
 	}
 
 	@Override
-	public List<TripDetails> getAllTripDetailsOfACustomer(Integer customerId) throws BookingException { // for getting all trip completed by a customer
-		return null;
+	public List<TripDetails> getAllTripDetailsOfACustomer(Integer customerId) throws BookingException, CustomerException, LoginException { // for getting all trip completed by a customer
 		
+		Optional<Customer> optional = customerRepo.findById(customerId);
 		
+		if(optional == null) throw new CustomerException("No customer found with Id "+customerId);
 		
+		Optional<LoginSession> existingSession = loginDao.findById(customerId); // checking is user  logged in or not 
+		if(existingSession == null) throw new LoginException("Please Login first to book a cab");
 		
+		Customer customer = optional.get();
+		
+		List<TripDetails> tripList = customer.getTriplist();
+		
+		if(tripList.isEmpty()) throw new BookingException("No trip details available");
+		
+		return tripList;
 	}
 
 	@Override
-	public String getBilloftrip(Integer customerId) throws BookingException {  // for fetching total bill spend by a customer
-		// TODO Auto-generated method stub
-		return null;
+	public Invoice getInvoiceDetails(Integer customerId) throws BookingException, CustomerException, LoginException {  // for fetching total bill spend by a customer
+		
+		   Optional<Customer> optional = customerRepo.findById(customerId);
+			
+			if(optional == null) throw new CustomerException("No customer found with Id "+customerId);
+		
+		Optional<LoginSession> existingSession = loginDao.findById(customerId); // checking is user  logged in or not 
+		if(existingSession == null) throw new LoginException("Please Login first to book a cab");
+		
+		
+		List<TripDetails> tripList = optional.get().getTriplist();
+	
+		if(tripList.isEmpty()) throw new BookingException("No travel details available for customer Id "+customerId);
+		
+		Invoice invoice = new Invoice(); // for providing totla trips details invoice to the customer.
+		
+		Double totalDistance = 0.0;
+		Double totalfare = 0.0;
+		
+		for(TripDetails trip : tripList) {
+			
+			totalDistance += trip.getDistanceInKM();
+			totalfare += trip.getBill();
+			
+		}
+		
+		invoice.setAvarageDistanceTravel((totalDistance / tripList.size()));
+		invoice.setAvarageRatePerKM(totalfare / totalDistance);
+		invoice.setNumberOfTrip(tripList.size());
+		invoice.setTotalDistance(totalDistance);
+		invoice.setTotalfare(totalfare);
+		
+		return invoice;
+		
 	}
 
 }

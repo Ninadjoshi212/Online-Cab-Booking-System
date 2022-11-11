@@ -1,5 +1,7 @@
 package com.flywheelcabs.modules;
 
+import java.time.LocalDate;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +22,10 @@ public class TripDetailDTO {
 	
 	@NotEmpty(message = "Mobilenumber cannot be empty")
 	private String mobileNumber;
+	
+	private LocalDate fromDate;
+	
+	private LocalDate toDate;
 	
 	@NotNull
 	private Integer customerId;

@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,8 +19,6 @@ import lombok.NoArgsConstructor;
 
 //Cab booking entity class which stores the booking data of cabs
 //It takes customer id to book any trip;
-
-
 
 @Entity
 @Data
@@ -48,15 +45,20 @@ public class TripDetails {
 	
 	private LocalTime time;
 	
-	private String cabId;
+	private LocalDate fromDate;
 	
+	private LocalDate toDate;
+	
+	private Integer cabId;
+	
+	private String carType;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Customer customer;
 	
 //	@JsonIgnore
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	private Driver driver;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Driver cabdriver;
 	
 
 }

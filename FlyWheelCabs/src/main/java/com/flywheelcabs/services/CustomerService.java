@@ -13,12 +13,14 @@ public interface CustomerService {
 
 	public Customer updateCustomer(Customer customer) throws CustomerException, LoginException;
 
-	public Customer deleteCustomer(Integer customerId) throws CustomerException;
+	public Customer deleteCustomer(Integer customerId) throws CustomerException, LoginException;
 
 	public List<Customer> getAllCustomers() throws CustomerException, AdminException;
 
-	public Customer getCustomerById(Integer customerId) throws CustomerException;
+	public Customer getCustomerById(Integer customerId) throws CustomerException, AdminException;
 
-	public Customer validateCustomer(String userName, String password) throws CustomerException;
+	public Customer validateCustomer(String userName, String password) throws CustomerException, AdminException;
+
+	public Customer updatePassword(String mobile, String oldPassword, String newPassword) throws CustomerException, LoginException;
 
 }

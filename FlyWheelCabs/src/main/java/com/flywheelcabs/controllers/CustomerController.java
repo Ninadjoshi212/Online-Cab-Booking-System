@@ -16,14 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flywheelcabs.exceptions.CustomerException;
-import com.flywheelcabs.exceptions.LoginException;
-import com.flywheelcabs.modules.AbstractUser;
 import com.flywheelcabs.modules.Customer;
-import com.flywheelcabs.modules.LoginDTO;
-import com.flywheelcabs.modules.LoginSession;
-import com.flywheelcabs.repositories.LoginSessionDao;
 import com.flywheelcabs.services.CustomerService;
-import com.flywheelcabs.services.LoginService;
 
 @RestController
 public class CustomerController {

@@ -27,7 +27,7 @@ public class Driver extends AbstractUser{
 	private Integer driverId;
 	
 	
-	 
+	 private boolean status = false;
 	
 	private Float rating;
 	

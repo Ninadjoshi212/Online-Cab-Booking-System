@@ -5,6 +5,7 @@ import java.util.List;
 import com.flywheelcabs.exceptions.BookingException;
 import com.flywheelcabs.exceptions.CustomerException;
 import com.flywheelcabs.exceptions.LoginException;
+import com.flywheelcabs.modules.Invoice;
 import com.flywheelcabs.modules.TripDetailDTO;
 import com.flywheelcabs.modules.TripDetails;
 
@@ -14,10 +15,10 @@ public interface TripServices {
 	
 	public TripDetails updateTicketDetails(TripDetailDTO ticketDetails,  Integer tripBookedId) throws BookingException;
 	
-	public TripDetails deleteTicketDetails(Integer tripBookingId) throws BookingException;
+	public TripDetails deleteTicketDetails(Integer tripBookingId) throws BookingException, LoginException;
 	
-	public List<TripDetails> getAllTripDetailsOfACustomer(Integer customerId) throws BookingException;
+	public List<TripDetails> getAllTripDetailsOfACustomer(Integer customerId) throws BookingException, CustomerException, LoginException;
 	
-	public String getBilloftrip(Integer customerId) throws BookingException;
+	public Invoice getInvoiceDetails(Integer customerId) throws BookingException, CustomerException, LoginException;
 	
 }

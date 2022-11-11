@@ -48,11 +48,14 @@ public class TripDetails {
 	
 	private LocalTime time;
 	
+	private String cabId;
+	
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Customer customer;
+	
 //	@JsonIgnore
 //	@ManyToOne(cascade = CascadeType.ALL)
-//	private Customer customer;
-	
-//	@ManyToOne
 //	private Driver driver;
 	
 

@@ -19,6 +19,8 @@ public class LoginSession {
 	@Id
 	@Column(unique = true)
 	private Integer userId;
+	
+	private String mobile;
 	private String userUniqueId;
 	private LocalDateTime loginTime;
 	private String type;

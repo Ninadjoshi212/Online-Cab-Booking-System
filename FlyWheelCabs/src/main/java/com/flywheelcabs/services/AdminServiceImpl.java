@@ -1,15 +1,28 @@
 package com.flywheelcabs.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.flywheelcabs.exceptions.AdminException;
 import com.flywheelcabs.modules.Admin;
+import com.flywheelcabs.modules.TripDetails;
 import com.flywheelcabs.repositories.AdminRepo;
+import com.flywheelcabs.repositories.CustomerRepo;
+import com.flywheelcabs.repositories.TicketBookingDao;
 
+@Service
 public class AdminServiceImpl implements AdminServices {
-  
+    @Autowired
 	private AdminRepo aRepo;
+  
+    @Autowired
+    private CustomerRepo cRepo;
+    
+    private TicketBookingDao TktRepo;
 	
 	
 	@Override
@@ -45,21 +58,37 @@ public class AdminServiceImpl implements AdminServices {
 	}
 
 	@Override
-	public List<TicketBookingService> getAllTrips(Integer customerId) throws AdminException {
+	public List<TripDetails> getAllTrips(Integer customerId) throws AdminException {
+		// TODO Auto-generated method stub
+		 
+			return null;
+	}
+
+	@Override
+	public List<TripDetails> getTripCabwise() throws AdminException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-//	@Override
-//	public List<TicketBookingService> getAllTrips(Integer customerId) throws AdminException {
-//		// TODO Auto-generated method stub
-//		Optional<Admin> tickets= aRepo.findById(customerId);	
-//		if(tickets.isEmpty()) {
-//			return throw new AdminException("No bookings available");
-//		}
-//		//List<TicketBookingService> listOfTrips= TicketBookingServiced
-//	}
-// 
+	@Override
+	public List<TripDetails> getTripCustomerwise() throws AdminException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	@Override
+	public List<TripDetails> getTripDatewise() throws AdminException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TripDetails> getAllTripsForDays(Integer customerId, LocalDateTime fromDate, LocalDateTime toDate)
+			throws AdminException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+ 
 	
 }

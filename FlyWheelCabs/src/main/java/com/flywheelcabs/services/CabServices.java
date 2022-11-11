@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.flywheelcabs.exceptions.CabException;
 import com.flywheelcabs.modules.Cab;
 
-@Service
+//@Service  pps
 public interface CabServices {
 	
 	public Cab insertCab(Cab cab);

@@ -1,5 +1,7 @@
 package com.flywheelcabs.repositories;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.Query;
@@ -16,5 +18,6 @@ public interface CustomerRepo extends JpaRepository<Customer, Integer> {
 
 	public Customer findByMobileAndPassword(String mobile, String password);
 	
+	Optional<Customer> findByMobile(String mobile);
 
 }

@@ -13,7 +13,7 @@ import com.flywheelcabs.modules.Admin;
 import com.flywheelcabs.modules.TripDetails;
 import com.flywheelcabs.repositories.AdminRepo;
 import com.flywheelcabs.repositories.CustomerRepo;
-import com.flywheelcabs.repositories.TicketBookingDao;
+
 
 @Service
 public class AdminServiceImpl implements AdminServices {
@@ -24,8 +24,6 @@ public class AdminServiceImpl implements AdminServices {
     @Autowired
     private CustomerRepo cRepo;
     
-    @Autowired
-    private TicketBookingDao TktRepo;
 	
 	
 	@Override

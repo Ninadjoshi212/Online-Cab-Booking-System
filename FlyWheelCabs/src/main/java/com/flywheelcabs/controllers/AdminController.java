@@ -17,24 +17,29 @@ import com.flywheelcabs.services.AdminServices;
 
 @RestController
 public class AdminController {
-	
+
+
 @Autowired
   private AdminServices aService;
+
   
+   //save admin
   @PostMapping("/admin")
   public ResponseEntity<Admin> saveAdminHandler(@RequestBody Admin admin) throws AdminException{
 	  Admin ad=aService.insertAdmin(admin);
 	  return new ResponseEntity<Admin>(ad,HttpStatus.ACCEPTED);
 	  
   }
+  //Admin update
   @PutMapping("/update")
-	public ResponseEntity<Admin> updateEmployee(@RequestBody Admin admin) throws AdminException{
+	public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin) throws AdminException{
 
 	Admin ad1 = aService.updateAdmin( admin);
 	return new ResponseEntity<Admin>(ad1,HttpStatus.OK);
 	
 	}
    
+  //delete admin by adminId
   @DeleteMapping("/admin/{adminId}")
   public ResponseEntity<Admin> deleteEmployeeById(@PathVariable("adminId") Integer adminId)throws AdminException {
 	

@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.flywheelcabs.exceptions.AdminException;
-import com.flywheelcabs.exceptions.CustomerException;
 import com.flywheelcabs.modules.Admin;
 import com.flywheelcabs.modules.TripDetails;
 import com.flywheelcabs.repositories.AdminRepo;
 import com.flywheelcabs.repositories.CustomerRepo;
-import com.flywheelcabs.repositories.TicketBookingDao;
+import com.flywheelcabs.repositories.TripdataRepository;
 
 @Service
 public class AdminServiceImpl implements AdminServices {
@@ -25,7 +24,7 @@ public class AdminServiceImpl implements AdminServices {
     private CustomerRepo cRepo;
     
     @Autowired
-    private TicketBookingDao TktRepo;
+    private TripdataRepository TktRepo;
 	
 	
 	@Override

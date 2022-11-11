@@ -1,6 +1,8 @@
 package com.flywheelcabs.services;
 
 import java.lang.StackWalker.Option;
+import java.lang.invoke.CallSite;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.flywheelcabs.exceptions.AdminException;
+import com.flywheelcabs.exceptions.BookingException;
 import com.flywheelcabs.exceptions.CustomerException;
 import com.flywheelcabs.exceptions.LoginException;
 import com.flywheelcabs.modules.Admin;
@@ -22,7 +25,8 @@ import com.flywheelcabs.repositories.TripdataRepository;
 @Service
 public class AdminServiceImpl implements AdminServices {
 	
-  @Autowired
+
+@Autowired
 	private AdminRepo aRepo;
   
     @Autowired
@@ -35,6 +39,7 @@ public class AdminServiceImpl implements AdminServices {
 
 	@Autowired
 	private LoginSessionDao loginDao;
+	
     
 	
 	@Override
@@ -111,51 +116,54 @@ public class AdminServiceImpl implements AdminServices {
 	}
 
 	@Override
-	public List<TripDetails> getTripCabwise() throws AdminException {
+	public List<TripDetails> getTripCabwise(String carType) throws AdminException, BookingException {
 
-		
-		
+		 List<TripDetails> tripCabwise= TktRepo.findByCarType(carType);
+		 if(tripCabwise.isEmpty()) {
+			 throw new BookingException ("No booking with car type"+ carType);
+		 }
 		// TODO Auto-generated method stub
-		return null;
+		return tripCabwise;
 	}
 
 	@Override
-	public List<TripDetails> getTripCustomerwise(Integer customerId) throws AdminException {
+	public List<TripDetails> getTripCustomerwise(Integer customerId) throws AdminException, CustomerException {
 		
-//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
+	//Optional<LoginSession> existingSession = loginDao.findById();
+		
+		//if(existingSession == null) throw new LoginException("Please login to update your data");
+	
+		List<TripDetails> listOfTrips =TktRepo.findByCustomerId(customerId);
+		if (listOfTrips.isEmpty())
+			throw new CustomerException("No trips Found by this Customer id " + customerId);
+    	return listOfTrips;
+	}
+
+	
+
+	@Override
+	public List<TripDetails> getAllTripsForDays(Integer customerId, LocalDate fromDate, LocalDate toDate)
+			throws AdminException, CustomerException {
+		
+		List<TripDetails> getAllTripsForDays =TktRepo.getAllTripsForDays(customerId, fromDate, toDate);
+		if (getAllTripsForDays.isEmpty())
+			throw new CustomerException("No trips Found");
+    	return getAllTripsForDays;
+//		Optional<Log;inSession> existingSession = loginDao.findById(admin.getAdminId());
 //		
 //		if(existingSession == null) throw new LoginException("Please login to update your data");
 	
-//		List<TripDetails> listOfTrips =cRepo.findByCustomerId(customerId);
-//		if (listOfTrips.isEmpty())
-//			throw new CustomerException("No trips Found by this Customer id " + customerId);
-    	//return listOfTrips;
-		return null;
-		  
 	}
 
 	@Override
-	public List<TripDetails> getTripDatewise() throws AdminException {
+	public List<TripDetails> getTripDatewise(LocalDate date) throws AdminException, CustomerException {
 
-//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
-//		
-//		if(existingSession == null) throw new LoginException("Please login to update your data");
+		List<TripDetails> getTripDatewise =TktRepo.findByDate(date);
+		if (getTripDatewise.isEmpty())
+			throw new CustomerException("No trips Found");
+    	return getTripDatewise;
+		// TODO Auto-generated method stub
 		
-		//List<TripDetails> getTripDatewise =cRepo.getTripDatewise();
-		//if (getTripDatewise.isEmpty())
-//			throw new CustomerException("No trips Found");
-    	//return getTripDatewise;
-		return null;
-	}
-
-	@Override
-	public List<TripDetails> getAllTripsForDays(Integer customerId, LocalDateTime fromDate, LocalDateTime toDate)
-			throws AdminException {
-
-//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
-//		
-//		if(existingSession == null) throw new LoginException("Please login to update your data");
-		return null;
 	}
 
  

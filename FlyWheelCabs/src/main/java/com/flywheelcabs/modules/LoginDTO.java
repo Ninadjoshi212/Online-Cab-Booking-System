@@ -21,7 +21,7 @@ public class LoginDTO {
 	
 	@Size(min = 6, max = 15, message = "Password length should be 6 - 15 character")
 	@NotBlank
-	@Pattern(regexp = "[a-z]{2,7}[A-Z]{2,7}[0-9]{1,9}", message = "password should look like abcABC999, Morethan 2 lowercase, upercase and number")
+	@Pattern(regexp = "[a-z]{2,7}[A-Z]{2,7}[#@$%&*]{1,2}[0-9]{1,9}", message = "password should look like abcABC@999, Morethan 2 lowercase, upercase and number ")
 	private String password;
 	
 	

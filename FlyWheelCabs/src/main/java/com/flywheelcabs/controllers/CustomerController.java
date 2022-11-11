@@ -72,14 +72,5 @@ public class CustomerController {
 		return  new ResponseEntity<>(result, HttpStatus.ACCEPTED);
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

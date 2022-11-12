@@ -26,7 +26,7 @@ import com.flywheelcabs.services.AdminServices;
 
 @RestController
 public class AdminController {
-
+  
 
 @Autowired
   private AdminServices aService;
@@ -47,6 +47,8 @@ public class AdminController {
 	return new ResponseEntity<Admin>(ad1,HttpStatus.OK);
 	
 	}
+  
+  
    
   //delete admin by adminId
   @DeleteMapping("/admin/{adminId}")
@@ -56,17 +58,23 @@ public class AdminController {
 	return new ResponseEntity<Admin>(adm2,HttpStatus.OK);
 }
   
+  
+  
   @GetMapping("/alltripsbycustomerid/{customerId}")
   public ResponseEntity<List <TripDetails>> getAllTripsByCustomerId(@PathVariable("customerId") Integer customerId) throws AdminException, LoginException, CustomerException{
 	  List<TripDetails> list=aService.getAllTrips(customerId);
 	  return new ResponseEntity<List<TripDetails>>(list,HttpStatus.OK);
   }
   
+  
+  
   @GetMapping("/getTripcabwise/{carType}")
   public ResponseEntity<List <TripDetails>> getTripcabwise(@PathVariable("carType") String carType) throws AdminException, LoginException, CustomerException, BookingException{
 	  List<TripDetails> list=aService.getTripCabwise(carType);
 	  return new ResponseEntity<List<TripDetails>>(list,HttpStatus.OK);
   } 
+  
+  
   
   @GetMapping("/getTripForDays/{cType}/{sDate}/{eDate}")
   public ResponseEntity<List <TripDetails>> getTripForDays(@PathVariable("cType") Integer customerId,@PathVariable("sDate") LocalDate fromDate, @PathVariable("eDate")LocalDate toDate) throws AdminException, LoginException, CustomerException, BookingException{

@@ -3,6 +3,8 @@ package com.flywheelcabs.repositories;
 
 
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,8 +20,8 @@ public interface DriverDAO extends JpaRepository<Driver, Integer>{
 //		
 //		public List<Driver> findByCabAvailable(String bool);
 //		
-////		@Query("select * from Driver b  where b.rating>4.5")
-//		public List<Driver>findByRatingGreaterThan(float r);
+//		@Query("select * from Driver b  where b.rating>4.5")
+		public List<Driver>findByRatingGreaterThan(float r);
 		
 		
 }

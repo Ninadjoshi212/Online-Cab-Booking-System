@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flywheelcabs.exceptions.DriverException;
@@ -27,25 +28,25 @@ import com.flywheelcabs.services.DriverService;
 public class DriverController {
 
 	@Autowired
-	private DriverService ds;
+	private DriverService dservice;
 	
 	@PostMapping("/drivers")
 	public ResponseEntity<Driver> resgisterDriverHandler(@Valid @RequestBody Driver driver) throws DriverException{
-		Driver dr= ds.registerDriver(driver);
+		Driver dr= dservice.registerDriver(driver);
 		
 		return new ResponseEntity<Driver>(dr,HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/drivers/{driverId}")
 	public ResponseEntity<Driver> getDriverByIdHandler(@PathVariable("driverId") Integer driverId) throws DriverException{
-		Driver dr=ds.viewBestDriver(driverId);
+		Driver dr=dservice.viewBestDriver(driverId);
 		
 		return new ResponseEntity<Driver>(dr,HttpStatus.OK);
 	}
 	
 	@GetMapping("/getalldrivers")
 	public ResponseEntity<List<Driver>> getAllEmployeeDetails() throws DriverException{
-		List<Driver> dr=ds.getAllDriver();
+		List<Driver> dr=dservice.getAllDriver();
 		
 		
 		return new ResponseEntity<List<Driver>>(dr,HttpStatus.OK);
@@ -54,15 +55,21 @@ public class DriverController {
 	@DeleteMapping("/deletedrivers/{driverId}")
 	public ResponseEntity<Driver> deleteEmployeeById(@PathVariable("driverId") Integer driverId) throws DriverException{
 		
-		Driver dr=ds.removeDriver(driverId);
+		Driver dr=dservice.removeDriver(driverId);
 		return new ResponseEntity<Driver>(dr, HttpStatus.OK);
 	}
 	
 	@PutMapping("/drivers/{driverId}")
 	public ResponseEntity<Driver> updateEmployee(@PathVariable("driverId") Driver driver) throws DriverException{
-		Driver em=ds.updateDriver(driver);
+		Driver em=dservice.updateDriver(driver);
 		
 		return new ResponseEntity<Driver>(em,HttpStatus.OK);
+	}
+	
+	@GetMapping("/bestdriver/{driverId}/{rating}")
+	public List<Driver> getBestDriver(@PathVariable("driverId") Integer driverId,@PathVariable("rating")  float rating) throws DriverException{
+		
+		return dservice.viewBestDriver(driverId,rating);
 	}
 	
 }

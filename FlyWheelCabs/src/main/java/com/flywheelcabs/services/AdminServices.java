@@ -1,6 +1,9 @@
 package com.flywheelcabs.services;
 
+
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import com.flywheelcabs.exceptions.AdminException;
@@ -24,10 +27,9 @@ public interface AdminServices {
     
 	public List<TripDetails> getTripCabwise(String carType) throws AdminException,BookingException;
 	
-	public List<TripDetails> getTripCustomerwise(Integer customerId) throws AdminException, CustomerException;
 	
-	public List<TripDetails> getAllTripsForDays(Integer customerId,LocalDate fromDate ,LocalDate toDate) throws AdminException, CustomerException;
+	public List<TripDetails> getAllTripsForDays(LocalDate fromDate ,LocalDate toDate) throws AdminException, CustomerException;
 
-	public List<TripDetails> getTripDatewise(LocalDate date) throws AdminException, CustomerException;
+	public List<TripDetails> getTripDatewise(String date) throws AdminException, CustomerException, ParseException;
 
 }

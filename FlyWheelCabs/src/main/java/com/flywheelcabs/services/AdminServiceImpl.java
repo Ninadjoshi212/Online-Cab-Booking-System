@@ -2,8 +2,12 @@ package com.flywheelcabs.services;
 
 import java.lang.StackWalker.Option;
 import java.lang.invoke.CallSite;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -126,39 +130,29 @@ public class AdminServiceImpl implements AdminServices {
 		return tripCabwise;
 	}
 
-	@Override
-	public List<TripDetails> getTripCustomerwise(Integer customerId) throws AdminException, CustomerException {
-		
-	//Optional<LoginSession> existingSession = loginDao.findById();
-		
-		//if(existingSession == null) throw new LoginException("Please login to update your data");
-	
-		List<TripDetails> listOfTrips =TktRepo.findByCustomerId(customerId);
-		if (listOfTrips.isEmpty())
-			throw new CustomerException("No trips Found by this Customer id " + customerId);
-    	return listOfTrips;
-	}
-
 	
 
 	@Override
-	public List<TripDetails> getAllTripsForDays(Integer customerId, LocalDate fromDate, LocalDate toDate)
+	public List<TripDetails> getAllTripsForDays( LocalDate fromDate, LocalDate toDate)
 			throws AdminException, CustomerException {
 		
-		List<TripDetails> getAllTripsForDays =TktRepo.getAllTripsForDays(customerId, fromDate, toDate);
+
+		List<TripDetails> getAllTripsForDays =TktRepo.getAllTripsForDays( fromDate, toDate);
 		if (getAllTripsForDays.isEmpty())
 			throw new CustomerException("No trips Found");
     	return getAllTripsForDays;
-//		Optional<Log;inSession> existingSession = loginDao.findById(admin.getAdminId());
-//		
-//		if(existingSession == null) throw new LoginException("Please login to update your data");
+
 	
 	}
 
 	@Override
-	public List<TripDetails> getTripDatewise(LocalDate date) throws AdminException, CustomerException {
-
-		List<TripDetails> getTripDatewise =TktRepo.findByDate(date);
+	public List<TripDetails> getTripDatewise(String date) throws AdminException, CustomerException, ParseException {
+        
+	  
+		DateTimeFormatter dtf=DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate ld=LocalDate.parse(date,dtf);
+		
+		List<TripDetails> getTripDatewise =TktRepo.findByDate(ld);
 		if (getTripDatewise.isEmpty())
 			throw new CustomerException("No trips Found");
     	return getTripDatewise;

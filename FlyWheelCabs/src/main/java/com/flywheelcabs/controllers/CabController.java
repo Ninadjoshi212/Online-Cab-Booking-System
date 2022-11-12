@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.flywheelcabs.exceptions.AdminException;
 import com.flywheelcabs.exceptions.CabException;
 import com.flywheelcabs.modules.Cab;
 import com.flywheelcabs.services.CabServices;
@@ -29,7 +30,7 @@ public class CabController {
 //	Insert cab presentation layer 
 	
 	@PostMapping("/insertcab")
-	  public ResponseEntity<Cab> insertCabHandler(@RequestBody Cab cab){
+	  public ResponseEntity<Cab> insertCabHandler(@RequestBody Cab cab) throws AdminException{   //admin exception will be thrown if admin not loggedin
 		  
 		Cab savedCab =cabService.insertCab(cab);
 		
@@ -40,7 +41,7 @@ public class CabController {
 //Update cab
 
 	@PostMapping("/updatecab")
-	public ResponseEntity<Cab> updateCabHandler(@RequestBody Cab cab) throws CabException{
+	public ResponseEntity<Cab> updateCabHandler(@RequestBody Cab cab) throws CabException, AdminException{		//admin exception will be thrown if admin not loggedin
 		
 		Cab updatedCab = cabService.updateCab(cab);
 		
@@ -52,7 +53,7 @@ public class CabController {
 //Delete cab	
 	
 	@DeleteMapping("/deletecab/{cabId}")
-	public  ResponseEntity<Cab> deleteCabHandler(@PathVariable("cabId") Integer cabId) throws CabException{
+	public  ResponseEntity<Cab> deleteCabHandler(@PathVariable("cabId") Integer cabId) throws CabException, AdminException{		//admin exception will be thrown if admin not loggedin
 		
 		Cab deletedCab = cabService.deleteCab(cabId);
 		
@@ -60,7 +61,6 @@ public class CabController {
 	}
 	
 	
-//	@GetMapping("/getcabsbytype/{carType}")
 	
 //Get cab by car type	
 	
@@ -74,14 +74,14 @@ public class CabController {
 	}
 	
 	
-//	@GetMapping("/countcabsbytype/{carType}")
+
 //Get count of cabs by car type	
 	
 	@GetMapping("/countcabsbytype/{carType}")
 	public ResponseEntity<Integer> countCabsOfTypeHandler(@PathVariable("carType") String carType) throws CabException{
 		
 		Integer cabCount = cabService.countCabsOfType(carType);
-//		
+		
 		return new ResponseEntity<Integer>(cabCount,HttpStatus.OK);
 		
 	}

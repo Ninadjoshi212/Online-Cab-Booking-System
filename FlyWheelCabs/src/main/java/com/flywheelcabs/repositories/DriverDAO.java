@@ -6,6 +6,7 @@ package com.flywheelcabs.repositories;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.flywheelcabs.modules.*;
@@ -14,7 +15,8 @@ public interface DriverDAO extends JpaRepository<Driver, Integer>{
 
 	public Driver findByMobileAndPassword(String mobileNumber,String password);
 
-//		public Optional<Driver> findByUserUsername(String name);
+		@Query("select d from Driver d where d.userName=?1")
+		public Driver findByUserName(String userName);
 //		
 //		public Optional<Driver>findByUserMobile(String mobile);
 //		

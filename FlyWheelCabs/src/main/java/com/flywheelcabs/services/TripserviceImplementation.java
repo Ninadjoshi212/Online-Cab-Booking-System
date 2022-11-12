@@ -134,12 +134,15 @@ public class TripserviceImplementation  implements TripServices{
 
 			TripDetails tripdata = optional.get();
 			
+			Double rate = (double) tripdata.getCabdriver().getCab().getPerKmRate();
 		
 				Double distance =  Math.floor(Math.random()*(100 - 3 + 1)+ 3); //Random Distance finder
 				
 				tripdata.setStartingLocation(ticketDetails.getStartingLocation());
 				
 				tripdata.setDestination(ticketDetails.getDestination());
+				
+				tripdata.setBill(distance * rate);
 				
 				tripdata.setDistanceInKM(distance);
 				

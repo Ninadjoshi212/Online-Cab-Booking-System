@@ -1,8 +1,10 @@
 package com.flywheelcabs.controllers;
 
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,11 +76,17 @@ public class AdminController {
 	  return new ResponseEntity<List<TripDetails>>(list,HttpStatus.OK);
   } 
   
+  @GetMapping("/tripByDate/{date}")
+  public ResponseEntity<List<TripDetails>> getTripByDate(@PathVariable("date")String date) throws AdminException, CustomerException, ParseException{
+	  List<TripDetails> list=aService.getTripDatewise(date);
+	  return new ResponseEntity<List<TripDetails>>(list,HttpStatus.OK);
+	  
+  }
   
   
-  @GetMapping("/getTripForDays/{cType}/{sDate}/{eDate}")
-  public ResponseEntity<List <TripDetails>> getTripForDays(@PathVariable("cType") Integer customerId,@PathVariable("sDate") LocalDate fromDate, @PathVariable("eDate")LocalDate toDate) throws AdminException, LoginException, CustomerException, BookingException{
-	  List<TripDetails> list=aService.getAllTripsForDays(customerId,fromDate,toDate);
+  @GetMapping("/getTripForDays/{sDate}/{eDate}")
+  public ResponseEntity<List <TripDetails>> getTripForDays(@PathVariable("sDate") LocalDate fromDate, @PathVariable("eDate")LocalDate toDate) throws AdminException, LoginException, CustomerException, BookingException{
+	  List<TripDetails> list=aService.getAllTripsForDays(fromDate,toDate);
 	  return new ResponseEntity<List<TripDetails>>(list,HttpStatus.OK);
   }
   

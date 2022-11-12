@@ -21,7 +21,7 @@ public class AbstractUser {
 	private String userName;
 
 	@Size(min = 6, max = 15, message = "password length should be in between 6 - 15 character")
-	@Pattern(regexp = "[a-z]{2,7}[A-Z]{2,7}[0-9]{1,9}", message = "password should look like abcABC999, Morethan 2 lowercase, upercase and number ")
+	@Pattern(regexp = "[a-z]{2,7}[A-Z]{2,7}[#@$%&*]{1,2}[0-9]{1,9}", message = "password should look like abcABC999, Morethan 2 lowercase, upercase and number ")
 	@NotBlank(message = "password must not be blank")
 	private String password;
 

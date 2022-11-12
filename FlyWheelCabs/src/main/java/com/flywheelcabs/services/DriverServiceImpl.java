@@ -75,8 +75,21 @@ public class DriverServiceImpl implements DriverService {
 
 	@Override
 	public Driver viewBestDriver(Integer driverId) throws DriverException {
-		// TODO Auto-generated method stub
-		return null;
+		return driverDao.findById(driverId).orElseThrow(()-> new DriverException("Invalid Driver id"));
+	}
+
+	@Override
+	public List<Driver> viewBestDriver(Integer driverId, float rating) throws DriverException {
+		Optional<Driver> opt= driverDao.findById(driverId);
+		if (opt.isEmpty()) {
+			System.out.println("driver is not loged  in");
+
+			throw new DriverException("Driver is not loged in ,Please log in first");
+		}
+
+		List<Driver> bestDriver = driverDao.findByRatingGreaterThan(rating);
+
+		return bestDriver;
 	}
 
 	

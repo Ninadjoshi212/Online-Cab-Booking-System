@@ -1,5 +1,8 @@
 package com.flywheelcabs.services;
 
+import java.lang.StackWalker.Option;
+import java.lang.invoke.CallSite;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -8,28 +11,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.flywheelcabs.exceptions.AdminException;
+import com.flywheelcabs.exceptions.BookingException;
+import com.flywheelcabs.exceptions.CustomerException;
+import com.flywheelcabs.exceptions.LoginException;
 import com.flywheelcabs.modules.Admin;
+import com.flywheelcabs.modules.Customer;
+import com.flywheelcabs.modules.LoginSession;
 import com.flywheelcabs.modules.TripDetails;
 import com.flywheelcabs.repositories.AdminRepo;
 import com.flywheelcabs.repositories.CustomerRepo;
-
+import com.flywheelcabs.repositories.LoginSessionDao;
 import com.flywheelcabs.repositories.TripdataRepository;
 @Service
 public class AdminServiceImpl implements AdminServices {
 	
-  @Autowired
+
+@Autowired
 	private AdminRepo aRepo;
   
     @Autowired
     private CustomerRepo cRepo;
     
 
-//    @Autowired
-//    private TripdataRepository TktRepo;
+    @Autowired
+    private TripdataRepository TktRepo;
 
 
-//	@Autowired
-//	private LoginSessionDao loginDao;
+	@Autowired
+	private LoginSessionDao loginDao;
+	
     
 	
 	@Override
@@ -40,94 +50,120 @@ public class AdminServiceImpl implements AdminServices {
 	}
 
 	@Override
-	public Admin updateAdmin(Admin admin)throws AdminException {
-//		
-//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
-//		
-//		if(existingSession == null) throw new LoginException("Please login to update your data");
-//		
-//		Optional<Admin> optional = aRepo.findById(admin.getAdminId());
-//		
-//		if(optional.isPresent()) {
-//			return aRepo.save(admin);
-//		}
-//		throw new CustomerException("admin not found");
-		Optional<Admin> opt=aRepo.findById(admin.getAdminId());
-		if(opt.isPresent()) {
+	public Admin updateAdmin(Admin admin)throws AdminException, LoginException {
+		
+		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
+		
+		if(existingSession == null) throw new LoginException("Please login to update your data");
+		
+		Optional<Admin> optional = aRepo.findById(admin.getAdminId());
+		
+		if(optional.isPresent()) {
 			return aRepo.save(admin);
-			
-		}else {
+		}
+		else {
 			throw new AdminException("Invalid Admin details");
 		}
 	}
 	
 	@Override
-	public Admin deleteAdminById(Integer adminId) throws AdminException {
+	public Admin deleteAdminById(Integer adminId) throws AdminException, LoginException {
 		// TODO Auto-generated method stub
 		
-//		Optional<LoginSession> existingSession = loginDao.findById(adminId);
-//		
-//		if(existingSession == null) throw new LoginException("Please login to update your data");
+		Optional<LoginSession> existingSession = loginDao.findById(adminId);
+		
+		if(existingSession == null) throw new LoginException("Please login to update your data");
 		
 		Optional<Admin> opt=aRepo.findById(adminId);
+		
 		if(opt.isPresent()) {
+			
+			LoginSession session=existingSession.get();
+			loginDao.delete(session);
+			
+			
 			Admin existingAdmin=opt.get();
 			aRepo.delete(existingAdmin);
+			
 		  return existingAdmin;	
+		  
 		}else {
+			
 			throw new AdminException("Admin does not exist");
 		}
 	}
 
 	@Override
 
-	public List<TripDetails> getAllTrips(Integer customerId) throws AdminException {
+	public List<TripDetails> getAllTrips(Integer customerId) throws AdminException, LoginException, CustomerException {
 
-//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
-//		
-//		if(existingSession == null) throw new LoginException("Please login to update your data");
+		Optional<LoginSession> existingSession = loginDao.findById(customerId);
+		
+		if(existingSession == null) throw new LoginException("Please login to update your data");
 		 
-			return null;
+		Optional<Customer> optional  =cRepo.findById(customerId);
+		
+	  if(optional.isPresent()) {
+		  List<TripDetails> triplist=optional.get().getTriplist();
+		   
+		  if(triplist.isEmpty()) {
+			  throw new CustomerException("No Trips Booked");
+		  }
+		  return triplist;
+	  }
+	  throw new CustomerException("No customer available");
+	  
 	}
 
 	@Override
-	public List<TripDetails> getTripCabwise() throws AdminException {
+	public List<TripDetails> getTripCabwise(String carType) throws AdminException, BookingException {
 
-//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
-//		
-//		if(existingSession == null) throw new LoginException("Please login to update your data");
-		
+		 List<TripDetails> tripCabwise= TktRepo.findByCarType(carType);
+		 if(tripCabwise.isEmpty()) {
+			 throw new BookingException ("No booking with car type"+ carType);
+		 }
 		// TODO Auto-generated method stub
-		return null;
+		return tripCabwise;
 	}
 
 	@Override
-	public List<TripDetails> getTripCustomerwise() throws AdminException {
+	public List<TripDetails> getTripCustomerwise(Integer customerId) throws AdminException, CustomerException {
 		
-//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
-//		
-//		if(existingSession == null) throw new LoginException("Please login to update your data");
+	//Optional<LoginSession> existingSession = loginDao.findById();
 		
-		return null;
+		//if(existingSession == null) throw new LoginException("Please login to update your data");
+	
+		List<TripDetails> listOfTrips =TktRepo.findByCustomerId(customerId);
+		if (listOfTrips.isEmpty())
+			throw new CustomerException("No trips Found by this Customer id " + customerId);
+    	return listOfTrips;
+	}
+
+	
+
+	@Override
+	public List<TripDetails> getAllTripsForDays(Integer customerId, LocalDate fromDate, LocalDate toDate)
+			throws AdminException, CustomerException {
+		
+		List<TripDetails> getAllTripsForDays =TktRepo.getAllTripsForDays(customerId, fromDate, toDate);
+		if (getAllTripsForDays.isEmpty())
+			throw new CustomerException("No trips Found");
+    	return getAllTripsForDays;
+//		Optional<Log;inSession> existingSession = loginDao.findById(admin.getAdminId());
+//		
+//		if(existingSession == null) throw new LoginException("Please login to update your data");
+	
 	}
 
 	@Override
-	public List<TripDetails> getTripDatewise() throws AdminException {
+	public List<TripDetails> getTripDatewise(LocalDate date) throws AdminException, CustomerException {
 
-//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
-//		
-//		if(existingSession == null) throw new LoginException("Please login to update your data");
-		return null;
-	}
-
-	@Override
-	public List<TripDetails> getAllTripsForDays(Integer customerId, LocalDateTime fromDate, LocalDateTime toDate)
-			throws AdminException {
-
-//		Optional<LoginSession> existingSession = loginDao.findById(admin.getAdminId());
-//		
-//		if(existingSession == null) throw new LoginException("Please login to update your data");
-		return null;
+		List<TripDetails> getTripDatewise =TktRepo.findByDate(date);
+		if (getTripDatewise.isEmpty())
+			throw new CustomerException("No trips Found");
+    	return getTripDatewise;
+		// TODO Auto-generated method stub
+		
 	}
 
  

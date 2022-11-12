@@ -63,6 +63,8 @@ public class AdminServiceImpl implements AdminServices {
 		Optional<Admin> optional = aRepo.findById(admin.getAdminId());
 		
 		if(optional.isPresent()) {
+
+			loginDao.deleteById(admin.getAdminId());
 			return aRepo.save(admin);
 		}
 		else {
@@ -120,9 +122,14 @@ public class AdminServiceImpl implements AdminServices {
 	}
 
 	@Override
-	public List<TripDetails> getTripCabwise(String carType) throws AdminException, BookingException {
+	public List<TripDetails> getTripCabwise(String carType) throws AdminException, BookingException, LoginException {
 
-		 List<TripDetails> tripCabwise= TktRepo.findByCarType(carType);
+	  LoginSession existingSession = loginDao.findByType("admin");
+		
+		if(existingSession == null) throw new LoginException("Please login to update your data");
+
+
+		List<TripDetails> tripCabwise= TktRepo.findByCarType(carType);
 		 if(tripCabwise.isEmpty()) {
 			 throw new BookingException ("No booking with car type"+ carType);
 		 }
@@ -134,7 +141,11 @@ public class AdminServiceImpl implements AdminServices {
 
 	@Override
 	public List<TripDetails> getAllTripsForDays( LocalDate fromDate, LocalDate toDate)
-			throws AdminException, CustomerException {
+			throws AdminException, CustomerException, LoginException {
+		
+		  LoginSession existingSession = loginDao.findByType("admin");
+			
+			if(existingSession == null) throw new LoginException("Please login to update your data");
 		
 
 		List<TripDetails> getAllTripsForDays =TktRepo.getAllTripsForDays( fromDate, toDate);
@@ -146,8 +157,11 @@ public class AdminServiceImpl implements AdminServices {
 	}
 
 	@Override
-	public List<TripDetails> getTripDatewise(String date) throws AdminException, CustomerException, ParseException {
+	public List<TripDetails> getTripDatewise(String date) throws AdminException, CustomerException, ParseException, LoginException {
         
+		    LoginSession existingSession = loginDao.findByType("admin");
+			
+			if(existingSession == null) throw new LoginException("Please login to update your data");
 	  
 		DateTimeFormatter dtf=DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate ld=LocalDate.parse(date,dtf);

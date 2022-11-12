@@ -25,11 +25,11 @@ public interface AdminServices {
     public List<TripDetails> getAllTrips(Integer customerId) throws AdminException, LoginException,
     CustomerException;
     
-	public List<TripDetails> getTripCabwise(String carType) throws AdminException,BookingException;
+	public List<TripDetails> getTripCabwise(String carType) throws AdminException,BookingException, LoginException;
 	
 	
-	public List<TripDetails> getAllTripsForDays(LocalDate fromDate ,LocalDate toDate) throws AdminException, CustomerException;
+	public List<TripDetails> getAllTripsForDays(LocalDate fromDate ,LocalDate toDate) throws AdminException, CustomerException, LoginException;
 
-	public List<TripDetails> getTripDatewise(String date) throws AdminException, CustomerException, ParseException;
+	public List<TripDetails> getTripDatewise(String date) throws AdminException, CustomerException, ParseException, LoginException;
 
 }

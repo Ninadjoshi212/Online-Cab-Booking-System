@@ -77,7 +77,7 @@ public class AdminController {
   } 
   
   @GetMapping("/tripByDate/{date}")
-  public ResponseEntity<List<TripDetails>> getTripByDate(@PathVariable("date")String date) throws AdminException, CustomerException, ParseException{
+  public ResponseEntity<List<TripDetails>> getTripByDate(@PathVariable("date")String date) throws AdminException, CustomerException, ParseException, LoginException{
 	  List<TripDetails> list=aService.getTripDatewise(date);
 	  return new ResponseEntity<List<TripDetails>>(list,HttpStatus.OK);
 	  

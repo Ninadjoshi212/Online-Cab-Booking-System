@@ -6,19 +6,35 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.flywheelcabs.exceptions.AdminException;
 import com.flywheelcabs.exceptions.CabException;
 import com.flywheelcabs.modules.Cab;
+import com.flywheelcabs.modules.LoginSession;
 import com.flywheelcabs.repositories.CabRepo;
+import com.flywheelcabs.repositories.LoginSessionDao;
 
 
 @Service
 public class CabServiceImpl implements CabServices{
 	
 	@Autowired
-	private CabRepo cabRepo;
+	private CabRepo cabRepo;					// entity required to access Cab DAO
+	
+	@Autowired
+	private LoginSessionDao loginDao;			// entity required to check if the admin has logged in
+	
+	
+	
+	//Insert cab method implementation	- admin access required
 	
 	@Override
-	public Cab insertCab(Cab cab) {
+	public Cab insertCab(Cab cab) throws AdminException {
+		
+		LoginSession sessionStatus = loginDao.findByType("admin"); // Admin Login status check
+
+		if (sessionStatus == null)
+			throw new AdminException("Admin privileges not available!");
+
 		
 		Cab savedCab = cabRepo.save(cab);
 		
@@ -26,15 +42,23 @@ public class CabServiceImpl implements CabServices{
 	}
 	
 	
-
+	
+	// Update cab implementation	- admin access required
+	
 	@Override
-	public Cab updateCab(Cab cab) throws CabException {
+	public Cab updateCab(Cab cab) throws CabException, AdminException {
+		
+		LoginSession sessionStatus = loginDao.findByType("admin"); // Admin login status check
+
+		if (sessionStatus == null)
+			throw new AdminException("Admin privileges not available!");
+
 		
 		Optional<Cab> opt= cabRepo.findById(cab.getCabId());
 		
 		if (opt.isPresent()) {
 			
-			Cab updatedCab = cabRepo.save(cab);
+			Cab updatedCab = cabRepo.save(cab);					
 			return updatedCab;
 			
 		} else {
@@ -43,9 +67,17 @@ public class CabServiceImpl implements CabServices{
 		
 	}
 	
+	
+	// Delete cab implementation - admin access required
 
 	@Override
-	public Cab deleteCab(Integer cabId) throws CabException {
+	public Cab deleteCab(Integer cabId) throws CabException, AdminException {
+		
+		LoginSession sessionStatus = loginDao.findByType("admin"); // Admin Login status check
+
+		if (sessionStatus == null)
+			throw new AdminException("Admin privileges not available!");
+
 		
 		Optional<Cab> opt= cabRepo.findById(cabId);
 		
@@ -62,6 +94,8 @@ public class CabServiceImpl implements CabServices{
 	}
 	
 
+	// View cabs by type implementation
+	
 	@Override
 	public List<Cab> viewCabsOfType(String carType) throws CabException {
 
@@ -75,6 +109,8 @@ public class CabServiceImpl implements CabServices{
 		
 	}
 
+	
+	// Count of cabs by car type implementation
 	
 	@Override
 	public int countCabsOfType(String carType) throws CabException {

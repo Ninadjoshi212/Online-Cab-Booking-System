@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AbstractUser {
 
-	@Size(min = 3, max = 20, message = "Username length should be in between 3 to 20 characters")
 	@NotBlank
+	@Pattern(regexp = "[a-z]{1,10}_[0-9]{2,5}", message = "The user name should look like---> username_67 <--- and max 10 char and min 2 number max 5 number ")
 	private String userName;
 
 	@Size(min = 6, max = 15, message = "password length should be in between 6 - 15 character")

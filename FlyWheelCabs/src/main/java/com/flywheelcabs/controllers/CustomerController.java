@@ -13,19 +13,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flywheelcabs.exceptions.AdminException;
 import com.flywheelcabs.exceptions.CustomerException;
 import com.flywheelcabs.exceptions.LoginException;
 import com.flywheelcabs.modules.Customer;
+import com.flywheelcabs.modules.LoginDTO;
+import com.flywheelcabs.modules.LoginSession;
 import com.flywheelcabs.services.CustomerService;
+import com.flywheelcabs.services.LoginService;
 
 @RestController
 public class CustomerController {
 
 	@Autowired
 	private CustomerService cService;
+	
+	@Autowired
+	private LoginService lService;
 
 	@PostMapping("/customer/register")
 	public ResponseEntity<Customer> registerCustomerHandler(@Valid @RequestBody Customer customer)
@@ -37,7 +44,7 @@ public class CustomerController {
 	}
 
 	@PutMapping("/customer/update")
-	public ResponseEntity<Customer> updatCustomerHandler(@Valid @RequestBody Customer customer)
+	public ResponseEntity<Customer> updateCustomerHandler(@Valid @RequestBody Customer customer)
 			throws CustomerException, LoginException {
 
 		Customer updatedCustomer = cService.updateCustomer(customer);
@@ -47,7 +54,7 @@ public class CustomerController {
 
 	@DeleteMapping("/customer/{customerId}")
 	public ResponseEntity<Customer> deleteCustomerHandler(@PathVariable("customerId") Integer customerId)
-			throws CustomerException {
+			throws CustomerException, LoginException {
 
 		Customer deletedCustomer = cService.deleteCustomer(customerId);
 
@@ -66,7 +73,7 @@ public class CustomerController {
 
 	@GetMapping("/customer/{customerId}")
 	public ResponseEntity<Customer> getCustomerByIdHandler(@PathVariable("customerId") Integer customerId)
-			throws CustomerException {
+			throws CustomerException, AdminException {
 
 		Customer fetchedCustomer = cService.getCustomerById(customerId);
 
@@ -75,11 +82,27 @@ public class CustomerController {
 
 	@GetMapping("/customer/validate/{userName}/{password}")
 	public ResponseEntity<Customer> validateCustomerHandler(@PathVariable("userName") String userName,
-			@PathVariable("password") String password) throws CustomerException {
+			@PathVariable("password") String password) throws CustomerException, AdminException {
 
 		Customer validatedCustomer = cService.validateCustomer(userName, password);
 
 		return new ResponseEntity<Customer>(validatedCustomer, HttpStatus.ACCEPTED);
+	}
+	
+	@PostMapping("/customer/login")
+	public ResponseEntity<LoginSession> userLoginHandler(@Valid @RequestBody LoginDTO logindata) throws Exception{
+		
+		LoginSession loginSession = lService.userLoginService(logindata);
+		
+		return new ResponseEntity<>(loginSession, HttpStatus.OK);
+	}
+	
+	@GetMapping("/customer/logout")
+	public ResponseEntity<String> logoutCustomer(@RequestParam String key) throws CustomerException, LoginException {
+
+		 String status = lService.UserLogoutService(key);
+		 
+		 return new ResponseEntity<String>(status,HttpStatus.OK);
 	}
 
 }

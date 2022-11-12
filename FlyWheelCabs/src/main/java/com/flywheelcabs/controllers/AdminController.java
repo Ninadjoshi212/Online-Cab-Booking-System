@@ -1,6 +1,8 @@
 package com.flywheelcabs.controllers;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flywheelcabs.exceptions.AdminException;
+import com.flywheelcabs.exceptions.BookingException;
 import com.flywheelcabs.exceptions.CustomerException;
 import com.flywheelcabs.exceptions.LoginException;
 import com.flywheelcabs.modules.Admin;
@@ -58,5 +61,18 @@ public class AdminController {
 	  List<TripDetails> list=aService.getAllTrips(customerId);
 	  return new ResponseEntity<List<TripDetails>>(list,HttpStatus.OK);
   }
+  
+  @GetMapping("/getTripcabwise/{carType}")
+  public ResponseEntity<List <TripDetails>> getTripcabwise(@PathVariable("carType") String carType) throws AdminException, LoginException, CustomerException, BookingException{
+	  List<TripDetails> list=aService.getTripCabwise(carType);
+	  return new ResponseEntity<List<TripDetails>>(list,HttpStatus.OK);
+  } 
+  
+  @GetMapping("/getTripForDays/{cType}/{sDate}/{eDate}")
+  public ResponseEntity<List <TripDetails>> getTripForDays(@PathVariable("cType") Integer customerId,@PathVariable("sDate") LocalDate fromDate, @PathVariable("eDate")LocalDate toDate) throws AdminException, LoginException, CustomerException, BookingException{
+	  List<TripDetails> list=aService.getAllTripsForDays(customerId,fromDate,toDate);
+	  return new ResponseEntity<List<TripDetails>>(list,HttpStatus.OK);
+  }
+  
   
 }

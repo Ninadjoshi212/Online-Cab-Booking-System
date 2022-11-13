@@ -143,3 +143,47 @@ Some features describes bellow according to their role .
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/tripCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/tripCntrl.jpg?raw=true)
 
 <br>
+
+
+> # Schema
+
+   > ## Admin
+   
+   ![admin_schema](https://user-images.githubusercontent.com/82428558/201520522-1fde0915-078c-4d4b-b9c4-2d088f51e5e5.jpg)
+
+   > ## Customer
+   
+   ![customer_shema](https://user-images.githubusercontent.com/82428558/201520547-8307781c-9fb2-495b-9007-7fdb994f0403.jpg)
+
+   > ## Driver
+   
+   ![driver_schema](https://user-images.githubusercontent.com/82428558/201520565-e09b66f5-86e1-4906-984c-7765476b410e.jpg)
+ 
+   > ## LoginDTO
+   
+   ![loginDto_schema](https://user-images.githubusercontent.com/82428558/201520591-50ceb8fd-0346-4e39-bcb8-f8b3253c933b.jpg)
+
+   > ## LoginSession
+   
+   ![loginsession_schema](https://user-images.githubusercontent.com/82428558/201520614-b9a24c2a-04d6-4e50-8baf-25c147193408.jpg)
+ 
+   > ## Tripdetails
+   
+   ![tripdetails_schema](https://user-images.githubusercontent.com/82428558/201520633-200ec665-961c-4975-b3bc-f7d3721fdb97.jpg)
+
+   > ## TripDTO
+   
+   ![tripDto_schema](https://user-images.githubusercontent.com/82428558/201520650-fccb425b-64ce-44f5-8191-6ef54ecc5e6b.jpg)
+
+   > ## Cab
+   
+   ![cab_shema](https://user-images.githubusercontent.com/82428558/201520668-cbe690f8-b6a1-4933-bd66-de2f8153bfed.jpg)
+
+   > ## Invoice
+   
+   ![invoice_schema](https://user-images.githubusercontent.com/82428558/201520681-8ffc1182-00f6-47e6-a22e-a309d86b5cd2.jpg)
+
+   
+   
+
+

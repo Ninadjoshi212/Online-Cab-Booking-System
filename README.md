@@ -48,8 +48,8 @@ Some features describes bellow according to their role .
 
 
 > ### For Admin
-- Admin can register himself through admincontroller's "/admin" api.
-- For doing next admin tasks with database admin should login himself by login controller's "setting/login".
+- Admin can register himself.
+- For doing next admin tasks with database admin should login himself".
 - Assigning any available cab to any driver.
 - Can see all tripdetails of a Customer.
 - Managing everytrip by cabwise means which cab are booked more.
@@ -57,18 +57,19 @@ Some features describes bellow according to their role .
 - Update own details and also logout and delete own data.
 
 > ### For Customer
-- Customer can register himself through admincontroller's "/admin" api.
-- For booking any cab or trip he/she should login first by login controller's "setting/login".
+- Customer can register himself.
+- For booking any cab or trip he/she should login first".
 - Booktrip / A cab.
 - Cancel a trip / delete a trip data.
 - Viweing own travel history.
-- can find bestDriver available by rating.
+- Can rate drive based on trip exxperience.
+- Can find bestDriver available by rating.
 - Fetching Invoice for total travel details/spends on trip.
 - Updating own tripdetails before a timeperiod.
 - Logout, update details, delete account.
 
 > ### For Driver
-- Driver can register himself through admincontroller's "/admin" api.
+- Driver can register himself.
 - Mantaining how many trips have been made by him/her.
 - updating own data.
 - registering own car and type.
@@ -114,44 +115,30 @@ Some features describes bellow according to their role .
 <br>
 
 # Admin Controller
-- Admin can access all the information of customer, cab driver and cab.
-- Admin can access all Trip Details along with specific trip details using a particular cab or a customer.
 
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/adminCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/adminCntrl.jpg?raw=true)
 
 <br>
 
 # Customer Controller
-- Customer can login in the application and update their information using their mobile and password.
-- Customer can book trips using pickup location and destination.
-- Customer can access the invoice after the trip is completed.
-- Customer can rate the driver based on the trip experience.
 
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/CustomerCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/CustomerCntrl.jpg?raw=true)
 
 <br>
 
 # Driver Controller
-- Cab Driver can login in the application and update their information.
-- Cab driver can add and update their cab details.
-- Cab Driver can mark their availability according to the trips status.
 
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/driverCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/driverCntrl.jpg?raw=true)
 
 <br>
 
 # Cab Controller
-- Cab controller provides functionality to count the cab by type. 
-- Cab controller provides functionality to fetch the cab by type.
-- Cab controller provides functionality to update cab details.
 
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/cabCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/cabCntrl.jpg?raw=true)
 
 <br>
 
 # Trip Controller
-- Trip controller provides functionality to book, update and cancel trips.
-- Trip controller provides functionality to get the list of previous trip data.
 
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/tripCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/tripCntrl.jpg?raw=true)
 

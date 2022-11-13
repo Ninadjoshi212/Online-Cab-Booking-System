@@ -45,3 +45,10 @@
 -   Hibernate
 -   MySQL
 
+
+# ER Diagram
+![flywheel png](https://user-images.githubusercontent.com/101566760/201507233-0651cce1-c423-4949-86b0-9d0b304a3b6d.png)
+
+# Swagger UI
+## Login Controller
+[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351git/blob/main/images/Sw_1.png?raw=true)](https://github.com/Anantk05/temporary-partner-4254/blob/main/images/Swagger.png?raw=true)

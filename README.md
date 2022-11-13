@@ -51,5 +51,6 @@
 <br>
 
 # ER Diagram
-![final png of flywheel](https://user-images.githubusercontent.com/101566760/201506726-f0f5d808-ffdd-4b0e-b95e-b4ece1aa64ca.png)
+![flywheel png](https://user-images.githubusercontent.com/101566760/201507233-0651cce1-c423-4949-86b0-9d0b304a3b6d.png)
+
 

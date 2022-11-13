@@ -1,4 +1,4 @@
-# FLYWHEEL CABS - Online Cab Booking Application
+> # FLYWHEEL CABS - Online Cab Booking Application
 
 <p align="center">
 <img width="800" height="400" src="https://thumbs.dreamstime.com/b/taxi-online-service-calling-car-via-mobile-app-people-waiting-city-transport-gps-route-tracking-man-woman-use-gadget-map-238545411.jpg">
@@ -13,7 +13,7 @@
 
 <br>
 
-# *** Team Members ***
+> # *** Team Members ***
 
 -   <a href="https://uditshetty.github.io/" target="_blank" rel="noopener noreferrer" > Udit Varshney </a>
 -   <a href="https://ninadjoshi212.github.io/" target="_blank" rel="noopener noreferrer" > Ninad Joshi </a>
@@ -23,7 +23,7 @@
 
 <br>
 
-# *** Tech Stacks ***
+> # *** Tech Stacks ***
 
 -   Java Core
 -   Spring Data JPA
@@ -37,7 +37,44 @@
 
 <br>
 
-# *** Installation and Run ***
+
+> # Features
+
+This Java based REST API project have featurs like Register, Login, Logout, Update, Booking,  canceling or deleting, giving rating
+Some features describes bellow according to their role . 
+
+
+> ### For Admin
+- Admin can register himself through admincontroller's "/admin" api.
+- For doing next admin tasks with database admin should login himself by login controller's "setting/login".
+- Assigning any available cab to any driver.
+- Can see all tripdetails of a Customer.
+- Managing everytrip by cabwise means which cab are booked more.
+- Getting data about how many trips are booked per day or for a period of day.
+- Update own details and also logout and delete own data.
+
+> ### For Customer
+- Customer can register himself through admincontroller's "/admin" api.
+- For booking any cab or trip he/she should login first by login controller's "setting/login".
+- Booktrip / A cab.
+- Cancel a trip / delete a trip data.
+- Viweing own travel history.
+- can find bestDriver available by rating.
+- Fetching Invoice for total travel details/spends on trip.
+- Updating own tripdetails before a timeperiod.
+- Logout, update details, delete account.
+
+> ### For Driver
+- Driver can register himself through admincontroller's "/admin" api.
+- Mantaining how many trips have been made by him/her.
+- updating own data.
+- registering own car and type.
+
+
+<br>
+
+
+> # *** Installation and Run ***
 -  You can clone this repo and start the serve on localhost
 -   Before running the API server, we should update the database config inside the application.properties file.
 -   Update the port number, username and password as per your local database config.
@@ -52,7 +89,7 @@
 
 <br>
 
-# API / Endpoint
+> # API / Endpoint
 
 `https://localhost:8888/`
 
@@ -60,38 +97,38 @@
 
 <br>
 
-# *** ER Diagram ***
+> # *** ER Diagram ***
 ![flywheel png](https://user-images.githubusercontent.com/101566760/201507233-0651cce1-c423-4949-86b0-9d0b304a3b6d.png)
 
 <br>
 
-# *** Swagger UI ***
+> # *** Swagger UI ***
 # Login Controller
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/loginCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/loginCntrl.jpg?raw=true)
 
 <br>
 
-# Admin Controller
+> # Admin Controller
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/adminCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/adminCntrl.jpg?raw=true)
 
 <br>
 
-# Customer Controller
+> # Customer Controller
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/CustomerCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/CustomerCntrl.jpg?raw=true)
 
 <br>
 
-# Driver Controller
+> # Driver Controller
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/driverCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/driverCntrl.jpg?raw=true)
 
 <br>
 
-# Cab Controller
+> # Cab Controller
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/cabCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/cabCntrl.jpg?raw=true)
 
 <br>
 
-# Trip Controller
+> # Trip Controller
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/tripCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/tripCntrl.jpg?raw=true)
 
 <br>

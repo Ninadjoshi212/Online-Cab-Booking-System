@@ -133,7 +133,7 @@ public class CustomerController {
 	}
 
 //### Rating Driver ###
-	@GPutMapping("/customer/rate")
+	@PutMapping("/customer/rate")
 	public ResponseEntity<String> rateDriveHandler(@RequestParam("mobile") String mobile,
 			@RequestParam("driverUserName") String driverUserName,
 			@RequestParam("rating") Float rating) throws DriverException, LoginException {

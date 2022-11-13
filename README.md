@@ -13,10 +13,7 @@
 
 <br>
 
-
-
-
-# Team Members 
+# *** Team Members ***
 
 -   <a href="https://uditshetty.github.io/" target="_blank" rel="noopener noreferrer" > Udit Varshney </a>
 -   <a href="https://prathmeshs-0595.github.io/" target="_blank" rel="noopener noreferrer" > Prathmesh Shelar </a>
@@ -26,7 +23,18 @@
 
 <br>
 
-## Installation and Run
+# *** Tech Stacks ***
+
+-   Java Core
+-   Spring Data JPA
+-   Spring Security
+-   Spring Boot
+-   Hibernate
+-   MySQL
+
+<br>
+
+# *** Installation and Run ***
 -  You can clone this repo and start the serve on localhost
 -   Before running the API server, we should update the database config inside the application.properties file.
 -   Update the port number, username and password as per your local database config.
@@ -36,28 +44,43 @@
    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
    spring.datasource.username=**mysql username**
    spring.datasource.password=**YourPassword**
-   spring.jpa.hibernate.ddl-auto=update
+   spring.jpa.hibernate.git ddl-auto=update
 ```
-
-# Tech Stacks
-
--   Java Core ![Java](https://img.shields.io/badge/-Java-05122A?style=flat&logo=Java&logoColor=FFA518)&nbsp;
--   Spring Data JPA ![SpringBoot](https://img.shields.io/badge/-SpringBoot-05122A?style=flat&logo=springboot)&nbsp;
--   Spring Security ![SpringBoot](https://img.shields.io/badge/-SpringBoot-05122A?style=flat&logo=springboot)&nbsp;
--   Spring Boot ![SpringBoot](https://img.shields.io/badge/-SpringBoot-05122A?style=flat&logo=springboot)&nbsp;
--   Hibernate ![Hibernate](https://img.shields.io/badge/-Hibernate-05122A?style=flat&logo=hibernate)&nbsp;
--   MySQL ![MySQL](https://img.shields.io/badge/-MySQL-05122A?style=flat&logo=mysql)&nbsp;
 
 <br>
 
-# ER Diagram
+# *** ER Diagram ***
 ![flywheel png](https://user-images.githubusercontent.com/101566760/201507233-0651cce1-c423-4949-86b0-9d0b304a3b6d.png)
 
+<br>
 
+# *** Swagger UI ***
+# Login Controller
+[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/loginCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/loginCntrl.jpg?raw=true)
 
-# ER Diagram
-![flywheel png](https://user-images.githubusercontent.com/101566760/201507233-0651cce1-c423-4949-86b0-9d0b304a3b6d.png)
+<br>
 
-# Swagger UI
-## Login Controller
-[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351git/blob/main/images/Sw_1.png?raw=true)](https://github.com/Anantk05/temporary-partner-4254/blob/main/images/Swagger.png?raw=true)
+# Admin Controller
+[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/adminCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/adminCntrl.jpg?raw=true)
+
+<br>
+
+# Customer Controller
+[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/CustomerCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/CustomerCntrl.jpg?raw=true)
+
+<br>
+
+# Driver Controller
+[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/driverCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/driverCntrl.jpg?raw=true)
+
+<br>
+
+# Cab Controller
+[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/cabCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/cabCntrl.jpg?raw=true)
+
+<br>
+
+# Trip Controller
+[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/tripCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/tripCntrl.jpg?raw=true)
+
+<br>

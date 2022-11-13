@@ -13,6 +13,9 @@
 
 <br>
 
+
+
+
 # Team Members 
 
 -   <a href="https://uditshetty.github.io/" target="_blank" rel="noopener noreferrer" > Udit Varshney </a>
@@ -44,4 +47,9 @@
 -   Spring Boot ![SpringBoot](https://img.shields.io/badge/-SpringBoot-05122A?style=flat&logo=springboot)&nbsp;
 -   Hibernate ![Hibernate](https://img.shields.io/badge/-Hibernate-05122A?style=flat&logo=hibernate)&nbsp;
 -   MySQL ![MySQL](https://img.shields.io/badge/-MySQL-05122A?style=flat&logo=mysql)&nbsp;
+
+<br>
+
+# ER Diagram
+![final png of flywheel](https://user-images.githubusercontent.com/101566760/201506726-f0f5d808-ffdd-4b0e-b95e-b4ece1aa64ca.png)
 

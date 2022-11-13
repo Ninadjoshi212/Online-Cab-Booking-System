@@ -27,10 +27,13 @@
 
 -   Java Core
 -   Spring Data JPA
--   Spring Security
+-   Spring web
+-   Validation
 -   Spring Boot
 -   Hibernate
 -   MySQL
+-   Swegger-ui
+-   Lombok
 
 <br>
 
@@ -53,7 +56,7 @@
 
 `https://localhost:8888/`
 
-`http://localhost:8888/swagger-ui.html`
+`http://localhost:8888/swagger-ui/`
 
 <br>
 

@@ -5,9 +5,11 @@
 </p>
 <br>
 
-> This is an online cab booking system designed using Java **Spring MVC Framework**, SpringDataJpa, Hibernate, Lombok, Swagger<br><br>
+> We have created REST API for Online Cab Booking Application which can be used by Customers and Drivers to login into their profile, update their details and Book Cabs with option to select cab type and the cab or driver availability.<br><br>
 
-> It can be used to book cabs between an entered source and destination along with vehicle of our choice.<br><br>
+> All this is over looked by the Admin who can access the data in the application.<br><br>
+
+> We have implemented data and user validation at every step, for every user.<br><br>
 
 > It has all the basic facilities that are required by an end user to have a convenient and hassle free **Online Cab Booking Experience**. <br><br>
 
@@ -32,8 +34,9 @@
 -   Spring Boot
 -   Hibernate
 -   MySQL
--   Swegger-ui
+-   Swagger UI
 -   Lombok
+-   Postman
 
 <br>
 
@@ -72,26 +75,45 @@
 <br>
 
 # Admin Controller
+- Admin can access all the information of customer, cab driver and cab.
+- Admin can access all Trip Details along with specific trip details using a particular cab or a customer.
+
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/adminCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/adminCntrl.jpg?raw=true)
 
 <br>
 
 # Customer Controller
+- Customer can login in the application and update their information using their mobile and password.
+- Customer can book trips using pickup location and destination.
+- Customer can access the invoice after the trip is completed.
+- Customer can rate the driver based on the trip experience.
+
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/CustomerCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/CustomerCntrl.jpg?raw=true)
 
 <br>
 
 # Driver Controller
+- Cab Driver can login in the application and update their information.
+- Cab driver can add and update their cab details.
+- Cab Driver can mark their availability according to the trips status.
+
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/driverCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/driverCntrl.jpg?raw=true)
 
 <br>
 
 # Cab Controller
+- Cab controller provides functionality to count the cab by type. 
+- Cab controller provides functionality to fetch the cab by type.
+- Cab controller provides functionality to update cab details.
+
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/cabCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/cabCntrl.jpg?raw=true)
 
 <br>
 
 # Trip Controller
+- Trip controller provides functionality to book, update and cancel trips.
+- Trip controller provides functionality to get the list of previous trip data.
+
 [![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/tripCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/tripCntrl.jpg?raw=true)
 
 <br>

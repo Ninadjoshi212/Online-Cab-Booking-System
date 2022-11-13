@@ -17,11 +17,12 @@ public interface DriverDAO extends JpaRepository<Driver, Integer>{
 
 		@Query("select d from Driver d where d.userName=?1")
 		public Driver findByUserName(String userName);
-//		
-//		public Optional<Driver>findByUserMobile(String mobile);
-//		
-//		public List<Driver> findByCabAvailable(String bool);
-//		
+		
+		@Query("select d from Driver d where d.userName=?1 AND d.password=?2")
+		public Driver getDriverByUsernameAndpassword(String userName, String password);
+		
+		public Driver findByMobile(String mobile);
+		
 //		@Query("select * from Driver b  where b.rating>4.5")
 		public List<Driver>findByRatingGreaterThan(float r);
 		

@@ -40,12 +40,20 @@
 -   Update the port number, username and password as per your local database config.
 ```
    server.port=8888
-   spring.datasource.url=jdbc:mysql://localhost:3306/FlyingWheelsdb
+   spring.datasource.url=jdbc:mysql://localhost:3306/FlyWheeldb
    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
    spring.datasource.username=**mysql username**
-   spring.datasource.password=**YourPassword**
+   spring.datasource.password=**mysql password**
    spring.jpa.hibernate.git ddl-auto=update
 ```
+
+<br>
+
+# API / Endpoint
+
+`https://localhost:8888/`
+
+`http://localhost:8888/swagger-ui.html`
 
 <br>
 

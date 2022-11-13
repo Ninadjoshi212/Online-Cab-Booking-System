@@ -13,7 +13,7 @@
 
 <br>
 
-# Team Members
+# *** Team Members ***
 
 -   Udit Varshney
 -   Prathmesh Shelar
@@ -23,7 +23,18 @@
 
 <br>
 
-## Installation and Run
+# *** Tech Stacks ***
+
+-   Java Core
+-   Spring Data JPA
+-   Spring Security
+-   Spring Boot
+-   Hibernate
+-   MySQL
+
+<br>
+
+# *** Installation and Run ***
 -  You can clone this repo and start the serve on localhost
 -   Before running the API server, we should update the database config inside the application.properties file.
 -   Update the port number, username and password as per your local database config.
@@ -36,19 +47,40 @@
    spring.jpa.hibernate.ddl-auto=update
 ```
 
-# Tech Stacks
+<br>
 
--   Java Core
--   Spring Data JPA
--   Spring Security
--   Spring Boot
--   Hibernate
--   MySQL
-
-
-# ER Diagram
+# *** ER Diagram ***
 ![flywheel png](https://user-images.githubusercontent.com/101566760/201507233-0651cce1-c423-4949-86b0-9d0b304a3b6d.png)
 
-# Swagger UI
-## Login Controller
-[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351git/blob/main/images/Sw_1.png?raw=true)](https://github.com/Anantk05/temporary-partner-4254/blob/main/images/Swagger.png?raw=true)
+<br>
+
+# *** Swagger UI ***
+# Login Controller
+[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/loginCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/loginCntrl.jpg?raw=true)
+
+<br>
+
+# Admin Controller
+[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/adminCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/adminCntrl.jpg?raw=true)
+
+<br>
+
+# Customer Controller
+[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/CustomerCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/CustomerCntrl.jpg?raw=true)
+
+<br>
+
+# Driver Controller
+[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/driverCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/driverCntrl.jpg?raw=true)
+
+<br>
+
+# Cab Controller
+[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/cabCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/cabCntrl.jpg?raw=true)
+
+<br>
+
+# Trip Controller
+[![SwaggerUI](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/tripCntrl.jpg?raw=true)](https://github.com/Ninadjoshi212/fanatical-building-1351/blob/main/Assest/tripCntrl.jpg?raw=true)
+
+<br>

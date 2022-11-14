@@ -102,6 +102,11 @@ Some features describes bellow according to their role .
 <br>
 
 > # *** ER Diagram ***
+         
+- Customer to tripdetails have ***One-To-Many*** and Tripdetails to Customer have ***Many-To-One*** relations.
+- Tripdetails to Driver have ***Many-To-One*** and Driver to Tripdetails have ***One-To-Many*** relations.
+- Cab to Driver and Driver to Cab have ***One-To-One*** relation.
+
 ![flywheel png](https://user-images.githubusercontent.com/101566760/201507233-0651cce1-c423-4949-86b0-9d0b304a3b6d.png)
 
 <br>

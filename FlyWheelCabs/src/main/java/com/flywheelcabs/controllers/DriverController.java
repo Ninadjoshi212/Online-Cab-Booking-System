@@ -88,7 +88,7 @@ public class DriverController {
 	
 	//### Delete Account ###
 	@DeleteMapping("/deletedrivers/{driverId}")
-	public ResponseEntity<Driver> deleteEmployeeById(@PathVariable("driverId") Integer driverId) 
+	public ResponseEntity<Driver> deleteDriverById(@PathVariable("driverId") Integer driverId) 
 										throws DriverException,LoginException{
 		
 		Driver dr=dservice.removeDriver(driverId);

@@ -29,6 +29,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Driver extends AbstractUser{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer driverId;
